@@ -380,7 +380,7 @@ extension AppContext {
         }
         
         static func servicesAgreementURL(for locale: Locale) -> URL {
-            return URL(string: "INSERT SERVICES AGREEMENT URL HERE")!
+            return URL(string: "google.com")!
         }
     
         static let companySupportURL = URL(string: "INSERT SUPPORT URL HERE")!

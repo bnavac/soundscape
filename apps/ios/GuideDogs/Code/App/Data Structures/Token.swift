@@ -5,7 +5,7 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
-
+//A token is
 import Foundation
 
 class Token {
