@@ -498,14 +498,20 @@ class AuthoredActivityLoader {
             return currentEtag
         }
     }
+    //Function in the authoring tool that downloads images for waypoints and caches them if
+    //they aren't already cached. Since it is in the authoring tool, this may be removed
+    //without issue, though in the future this will need to be reinserted into the program.
+    //It was taken out due to a wierd bug with containsImage that prevents it from running
+    //on m2 macs.
     
     private func downloadImages(_ content: AuthoredActivityContent) async {
+        /*
         await withTaskGroup(of: Void.self) { group in
             let manager = SDWebImageManager.shared
             
             for (wptIndex, waypoint) in content.waypoints.enumerated() {
                 for (clipIndex, image) in waypoint.images.enumerated() {
-                    guard let key = manager.cacheKey(for: image.url), await manager.imageCache.containsImage(forKey: key, cacheType: .all) == .none else {
+                    guard let key = manager.cacheKey(for: image.url), await manager.imageCache.containsImage!(forKey: key, cacheType: .all) == .none else {
                         GDLogInfo(.authoredContent, "Image \(image.url.lastPathComponent) already cached (waypoint: \(wptIndex), clip: \(clipIndex))")
                         continue
                     }
@@ -521,6 +527,7 @@ class AuthoredActivityLoader {
         }
         
         GDLogInfo(.routeGuidance, "Finished downloading images for \(content.id)")
+         */
     }
     
     private func cacheImage(_ url: URL) async {
@@ -544,12 +551,15 @@ class AuthoredActivityLoader {
         if let featured = content.image {
             images.append(featured)
         }
-        
+        //Removes imaged cached in downloadImages. Taken out due to a bug with removeImage.
+        //Since this is in the authoring tool, this will not affect the state of the rest
+        //of the app, though this will need to be fixed in the future.
+        /*
         for image in images {
             if let key = manager.cacheKey(for: image) {
-                manager.imageCache.removeImage(forKey: key, cacheType: .all)
+                manager.imageCache.removeImage!(forKey: key, cacheType: .all)
             }
-        }
+        }*/
     }
     
     // MARK: Directories
