@@ -5,7 +5,7 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
-
+//Geocoding is a way of transforming a location into a set of coordinates, and vice-versa.
 import Foundation
 import CoreLocation
 import Contacts

@@ -91,6 +91,8 @@ class ExplorationGenerator: ManualGenerator, AutomaticGenerator {
     }
     
     private var noLocationMessage: String {
+        //For some reason, the geocoder does not seem to have a location
+        print("hello")
         return GDLocalizedString("general.error.location_services_find_location_error")
     }
     
