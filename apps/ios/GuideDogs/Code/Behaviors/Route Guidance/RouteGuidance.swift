@@ -539,7 +539,7 @@ class RouteGuidance: BehaviorBase {
                                               subtitle: current.waypoint.displayName,
                                               secondarySubtitle: formattedDistance)
     }
-    
+    //May be promising to implement the queue of beacons
     private func findNearestIntersection() -> String? {
         guard let current = currentWaypoint?.waypoint.location else {
             return nil
@@ -548,7 +548,10 @@ class RouteGuidance: BehaviorBase {
         guard let dataView = spatialDataContext.getDataView(for: current, searchDistance: IntersectionGenerator.arrivalDistance * 2) else {
             return nil
         }
-        
+        //If the data view isn't null, and if the current waypoint isn't null
+        //then it takes an intersection, finds the distance from the waypoint
+        //sorts it by distance, and then returns the main intersection if there is one
+        //or the secondary road if there isn't a main road
         return dataView.intersections
             .map({ (intersection: $0, distance: $0.location.distance(from: current)) })
             .sorted(by: { $0.distance < $1.distance })

@@ -37,7 +37,7 @@ class RouteDetail: RouteDetailProtocol {
     private(set) var waypoints: [LocationDetail] = []
     private let designData: DesignData?
     private var listeners: [AnyCancellable] = []
-    
+    //The variable is set if the AppContext is active
     var guidance: RouteGuidance? {
         guard let routeGuidance = AppContext.shared.eventProcessor.activeBehavior as? RouteGuidance else {
             return nil

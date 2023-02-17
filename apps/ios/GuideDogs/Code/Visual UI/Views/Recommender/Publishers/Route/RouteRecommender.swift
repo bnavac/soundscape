@@ -17,6 +17,7 @@ import CoreLocation
  * `RouteRecommenderView`, else the recommender publishes a `nil` value.
  *
  */
+//Used in the markers and routes screen
 class RouteRecommender: Recommender {
     
     // Properties

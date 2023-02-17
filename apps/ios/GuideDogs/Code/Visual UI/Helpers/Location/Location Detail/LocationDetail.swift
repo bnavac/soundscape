@@ -16,6 +16,7 @@ import SwiftUI
 struct LocationDetail {
     //Source is an enum which is the user's own location (I think)
     //Equatable is a protocol which just says that the class has the == operator
+    //MARK: Source
     enum Source: Equatable {
         
         case entity(id: String)
@@ -49,7 +50,11 @@ struct LocationDetail {
             // For OSM, return true
             return true
         }
-        
+        /*
+         * Finds the closest location to a coordinate based on the user's location.
+         * Param a: userLocation - 
+         * Param b: useEntranceIfAvailable -
+         */
         func closestLocation(from userLocation: CLLocation, useEntranceIfAvailable: Bool = true) -> CLLocation? {
             switch self {
             case .entity:
