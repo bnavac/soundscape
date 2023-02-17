@@ -8,7 +8,8 @@
 
 import Combine
 import CoreLocation
-
+//Beacon demo helper is a class to run a demo of beacons, used primarily on onboarding
+// as well as when adjusting the settings of the beacon, ie the volume and style of the beacon
 class BeaconDemoHelper {
     private enum BeaconType {
         case location(loc: GenericLocation, address: String?)

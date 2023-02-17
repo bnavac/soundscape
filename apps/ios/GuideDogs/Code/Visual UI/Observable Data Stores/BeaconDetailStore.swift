@@ -8,7 +8,8 @@
 
 import Foundation
 import Combine
-
+//Beacon detail store is a class that stores beacons in the realm database
+//https://github.com/realm/realm-swift
 class BeaconDetailStore: ObservableObject {
     
     // MARK: Properties

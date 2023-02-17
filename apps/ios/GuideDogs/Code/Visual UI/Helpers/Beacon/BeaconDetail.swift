@@ -7,7 +7,9 @@
 //
 
 import Foundation
-
+//Beacon detail is a small class containing some details about a beacon, in particular it
+//has information on the location that a beacon is set to, if audio is enable, and the
+// details of the route that they are on.
 struct BeaconDetail {
     
     // MARK: Parameters

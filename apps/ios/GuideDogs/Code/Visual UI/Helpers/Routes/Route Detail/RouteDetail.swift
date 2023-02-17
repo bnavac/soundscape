@@ -8,7 +8,9 @@
 
 import CoreLocation
 import Combine
-
+//A class which holds information on the users current route, in particular, it
+//has information on the waypoints of the route, though it is unknown if this
+//only includes routes on the authoring tool or general ones
 class RouteDetail: RouteDetailProtocol {
     
     struct DesignData {

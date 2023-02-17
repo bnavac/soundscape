@@ -22,7 +22,9 @@ extension Notification.Name {
     static let markerRemoved = Notification.Name("GDAMarkerRemoved")
     static let markerUpdated = Notification.Name("GDAMarkerUpdated")
 }
-
+//A reference entity is an object used in a marker which keeps track of a variety of information
+//such as the coordinates, name, and last updated time. It also has a variety of other properties
+//such as a key which allows it to be searched. 
 class ReferenceEntity: Object, ObjectKeyIdentifiable {
     // MARK: Constants
     
@@ -31,7 +33,7 @@ class ReferenceEntity: Object, ObjectKeyIdentifiable {
     }
     
     // MARK: Properties
-
+    //Persisted is a keyword that indicates to a realm object that it should manage that variable
     @Persisted(primaryKey: true) var id: String = UUID().uuidString // Primary key
     @Persisted var entityKey: String?
     @Persisted var lastUpdatedDate: Date?
@@ -147,7 +149,8 @@ class ReferenceEntity: Object, ObjectKeyIdentifiable {
         // Set temporary status
         isTemp = temp
     }
-    
+    //Initializer with a generic location instead of something such as an address
+    //Generic locations are usually created when getting the user's current location, generating a POI off of that
     convenience init(location: GenericLocation, name: String? = nil, estimatedAddress: String? = nil, annotation: String? = nil, temp: Bool = false) {
         self.init()
         
@@ -178,7 +181,7 @@ class ReferenceEntity: Object, ObjectKeyIdentifiable {
         // Set temporary status
         isTemp = temp
     }
-    
+    //Initaializer which takes in a marker, eg a beacon.
     convenience init?(markerParameters: MarkerParameters, entity: POI) {
         guard let id = markerParameters.id else { return nil }
         
@@ -294,7 +297,7 @@ class ReferenceEntity: Object, ObjectKeyIdentifiable {
     }
     
     // MARK: Static Methods
-    
+    //Method which lets a user add a new location (to what?)
     static func add(detail: LocationDetail, telemetryContext: String?, isTemporary: Bool = false, notify: Bool = true) throws -> String {
         if let id = detail.markerId, let marker = SpatialDataCache.referenceEntityByKey(id) {
             try update(entity: marker, location: detail.location.coordinate, nickname: detail.nickname, address: detail.estimatedAddress, annotation: detail.annotation, context: telemetryContext, isTemp: isTemporary)

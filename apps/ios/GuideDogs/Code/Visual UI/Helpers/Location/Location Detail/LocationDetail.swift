@@ -10,16 +10,18 @@ import Foundation
 import CoreLocation
 import CocoaLumberjackSwift
 import SwiftUI
-
+//Location detail is a class which contains a bunch of variables and initalizers
+//for a variety of differents types of locations, such as the users own location, as well
+//as their destination.
 struct LocationDetail {
-    
+    //Source is an enum which is the user's own location (I think)
+    //Equatable is a protocol which just says that the class has the == operator
     enum Source: Equatable {
         
         case entity(id: String)
         case coordinate(at: CLLocation)
         case designData(at: CLLocation, address: String)
         case screenshots(poi: GenericLocation)
-        
         fileprivate var entity: POI? {
             if case .entity(let id) = self {
                 return SpatialDataCache.searchByKey(key: id)
@@ -63,7 +65,8 @@ struct LocationDetail {
                 return poi.location
             }
         }
-        
+        //So lhs and rhs look like confusing names, but its actually standard(?) for the
+        //equatable protocol, meaning left-hand side and right-hand side
         static func == (lhs: Source, rhs: Source) -> Bool {
             switch lhs {
             case .entity(let lhsId):

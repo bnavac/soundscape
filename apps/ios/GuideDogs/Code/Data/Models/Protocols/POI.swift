@@ -7,7 +7,8 @@
 //
 
 import CoreLocation
-
+//Point of interest is a protocol which contains some open street map data
+//As well as some helper functions.
 /// Protocol for all OSM entity data structures
 protocol POI {
     var key: String { get }
