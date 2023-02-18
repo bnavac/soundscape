@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import CoreLocation
+import CoreLocation  //https://developer.apple.com/documentation/corelocation
+                     //Core Motion reports motion- and environment-related data from the onboard hardware of iOS devices, including from the accelerometers and gyroscopes, and from the pedometer, magnetometer, and barometer.
 
 /// Constants indicating the app's authorization to use core location services and the accuracy.
 enum CoreLocationAuthorizationStatus {

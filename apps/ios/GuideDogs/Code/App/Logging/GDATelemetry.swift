@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import AppCenterAnalytics
+import AppCenterAnalytics  //https://learn.microsoft.com/en-us/appcenter/sdk/analytics/ios
+                           //helps understand user behavior and customer engagement to improve app
 
 public class GDATelemetry {
     

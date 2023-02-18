@@ -5,9 +5,14 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
+//
+//
 
 import Foundation
-import iOS_GPX_Framework
+import iOS_GPX_Framework  //https://github.com/merlos/iOS-GPX-Framework
+                          //avaible from cocoapods
+                          //This is a iOS framework for parsing/generating GPX files. This Framework parses the GPX from a URL or Strings and create Objective-C Instances of GPX structure.
+                          //GPX file is GPS exchange format file, a text file with geographic information such as waypoints, tracks, and routes saved in it
 
 struct GPXIndex {
     static let zero = GPXIndex(track: 0, segment: 0, point: 0)
