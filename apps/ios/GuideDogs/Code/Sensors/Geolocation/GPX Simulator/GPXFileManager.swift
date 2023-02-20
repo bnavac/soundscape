@@ -5,9 +5,17 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
+//  GPXFileManager is a class where we can:
+//   - copy a GPX file from a location to the GPX files directory
+//   - write a GPX file from a given content and a filename.
+//   - remove a GPX file with a given file path.
 
 import Foundation
-import CocoaLumberjackSwift
+import CocoaLumberjackSwift  //https://github.com/CocoaLumberjack/CocoaLumberjack
+                             //avaible from cocoapods
+                             //replaces NSLog statements with DDLog statements
+                             //NSLog can be used to check the value of variables, log any notes that you need to make, and check for errors when you do not have a debugger available.
+                             //DDLog has same syntax as NSLog
 
 class GPXFileManager {
     
@@ -77,7 +85,7 @@ class GPXFileManager {
     }
     
     /**
-     Removes a GPX file with a givne file path.
+     Removes a GPX file with a given file path.
      
      - Parameter filepath: The GPX file path
      

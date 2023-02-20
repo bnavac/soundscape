@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import CoreLocation
-import GLKit
+import CoreLocation  //https://developer.apple.com/documentation/corelocation
+import GLKit         //https://developer.apple.com/documentation/glkit
 
 extension CLLocation {
     

@@ -5,6 +5,13 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
+//  This file is the view map on the screen
+//  File uses MapKit which displays Apple Map on to the screen
+//  Find MKMapViewDelegate+Extensions.swift
+//  Go to Code -> App -> Framework Extension -> MapKit -> MKMapViewDelegate+Extensions.swift
+//  LocationDetail is used in MKMapView, MKMapViewDelegate, and many more code files
+//  For the UI, maps uses LocationDetail to annotate the location and it
+//  LocationDetail holds RouteWaypoint which is related to Realm      <--add more here
 
 import Foundation
 import MapKit
