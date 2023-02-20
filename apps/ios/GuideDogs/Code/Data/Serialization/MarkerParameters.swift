@@ -15,7 +15,7 @@ enum ImportMarkerError: Error {
     case failedToFetchMarker
 }
 //Marker Parameters is a struct that contains information on a marker, eg., a beacon
-//Codable is a protocol which lets the object change its type
+//Codable is a protocol which lets the object change its type, 
 struct MarkerParameters: Codable {
     
     // MARK: Properties

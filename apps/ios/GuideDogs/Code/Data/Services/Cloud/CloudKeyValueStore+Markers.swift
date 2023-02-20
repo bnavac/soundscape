@@ -28,7 +28,7 @@ extension CloudKeyValueStore {
     private var markerKeys: [String] {
         return allKeys.filter { $0.hasPrefix(CloudKeyValueStore.markerKeyPrefix) }
     }
-    
+    ///Returns all non-nill keys in markerParameters
     private var markerParametersObjects: [MarkerParameters] {
         return markerKeys.compactMap { markerParameters(forKey: $0) }
     }

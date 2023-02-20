@@ -26,7 +26,13 @@ enum ServiceError: Error {
 class OSMServiceModel: OSMServiceModelProtocol {
     /// Path to the tile server
     private static let path = "/tiles"
-    
+    ///Gets tile data from the webserver by passing in the coordintes (the vector tile), a queue of stuff to  do
+    ///and some categories.
+    /// - Parameters:
+    ///    -tile: A VectorTile
+    ///    -categories: A supercategory which helps to distinguish which object the user is looking at
+    ///    -queue: A dispatch queue is a queue that allows for concurrency
+    ///    -callback: Makes a call to a server which gets a status code
     func getTileDataWithQueue(tile: VectorTile, categories: SuperCategories, queue: DispatchQueue, callback: @escaping OSMServiceModelProtocol.TileDataLookupCallback) {
         let url = URL(string: "\(ServiceModel.servicesHostName)\(OSMServiceModel.path)/\(tile.zoom)/\(tile.x)/\(tile.y).json")!
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ServiceModel.requestTimeout)
@@ -69,7 +75,10 @@ class OSMServiceModel: OSMServiceModelProtocol {
         
         task.resume()
     }
-    
+    /// 
+    /// - Parameters:
+    ///  -dyanmicURL: uses the url to make a request to the server
+    /// - Returns:
     func getDynamicData(dynamicURL: String, callback: @escaping OSMServiceModelProtocol.DynamicDataLookupCallback) {
         guard !dynamicURL.isEmpty else {
             callback(.unknown, nil, NSError(domain: ServiceModel.errorDomain, code: 0, userInfo: nil))

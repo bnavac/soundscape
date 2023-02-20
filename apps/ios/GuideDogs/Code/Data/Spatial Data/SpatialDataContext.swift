@@ -9,7 +9,9 @@
 import Foundation
 import RealmSwift
 import CoreLocation
-
+/*
+ * An enum for the possible values of the state variable in spatialDataContext
+ */
 enum SpatialDataState {
     case error
     case loadingCategories
@@ -17,7 +19,7 @@ enum SpatialDataState {
     case loading
     case ready
 }
-
+// An enum for the possible values of the error variable in SpatialDataContext
 enum SpatialDataContextError: Error {
     case noCategories
     case missingData
@@ -28,7 +30,7 @@ extension Notification.Name {
     static let tilesDidUpdate = Notification.Name("TilesDidUpdate")
     static let locationUpdated = Notification.Name("GDALocationUpdated")
 }
-
+//Ok this a big class where a lot of stuff happens
 // MARK: -
 
 class SpatialDataContext: NSObject, SpatialDataProtocol {
@@ -42,7 +44,7 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
     }
     
     // MARK: - Properties
-    
+    //A read only constant which
     static let zoomLevel: UInt = 16
     static let cacheDistance: CLLocationDistance = 1000
     static let initialPOISearchDistance: CLLocationDistance = 200
