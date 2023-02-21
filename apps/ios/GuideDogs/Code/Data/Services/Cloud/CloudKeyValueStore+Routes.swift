@@ -58,7 +58,7 @@ extension CloudKeyValueStore {
     private static func id(forRoute routeKey: String) -> String {
         return routeKey.replacingOccurrences(of: CloudKeyValueStore.routeKeyPrefix + ".", with: "")
     }
-    
+    ///Converts a route into JSON data and stores it (where?)
     func store(route: Route) {
         if let routeParameters = RouteParameters(route: route, context: .backup) {
             let encoder = JSONEncoder()
@@ -88,7 +88,6 @@ extension CloudKeyValueStore {
     }
     
     // MARK: Bulk Set/Get
-    
     /// Make sure to call this after syncing markers
     func syncRoutes(reason: CloudKeyValueStoreChangeReason, changedKeys: [String]? = nil) {
         // Importing
@@ -99,7 +98,7 @@ extension CloudKeyValueStore {
             store()
         }
     }
-    
+    ///Takes any changed keys and updates the routes they refer to (if any).
     private func importChanges(changedKeys: [String]? = nil) {
         var routeParametersObjects = self.routeParametersObjects
         
@@ -135,7 +134,7 @@ extension CloudKeyValueStore {
         
         notifyOfInvalidRoutesIfNeeded(routeParametersObjects: routeParametersObjects)
     }
-    
+    /// A helper function to convert a RouteParameter into a Route to be imported
     private func importChanges(routeParameters: RouteParameters) {
         let route = Route(from: routeParameters)
         importChanges(route: route)

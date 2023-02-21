@@ -14,7 +14,6 @@ extension Notification.Name {
     static let isInMotionDidChange = Notification.Name("GDAIsInMotionDidChange")
 }
 
-// MARK: -
 
 /// The principle class for detecting user motion activity.
 class MotionActivityContext {
