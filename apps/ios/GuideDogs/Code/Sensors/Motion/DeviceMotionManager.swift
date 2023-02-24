@@ -18,53 +18,56 @@ protocol DeviceMotionProvider: AnyObject {
 }
 
 class DeviceMotionManager: DeviceMotionProvider {
-    
+
     // MARK: Notification Keys
-    
+
     struct Keys {
         static let phoneIsFlat = "GDAPhoneIsFlatKey"
     }
-    
+
     // MARK: Properties
-    
+
     static let shared = DeviceMotionManager()
-    
+
     private let motionManager = CMMotionManager()
     private(set) var isFlat = false
-    
+
     // MARK: Actions
-    
+
     func startDeviceMotionUpdates() {
         guard motionManager.isDeviceMotionAvailable else {
             GDLogMotionVerbose("Could not start device motion updates. Device motion estimation is unavailable.")
             return
         }
-        
+
         motionManager.deviceMotionUpdateInterval = 0.5
 
         let operationQueue = OperationQueue()
         operationQueue.name = "DeviceMotionQueue"
-        
+
+        //recurses until it errors by failing to get data or it stops being flat
         motionManager.startDeviceMotionUpdates(to: operationQueue) { (data, _) in
             guard let data = data else {
                 // Failed to get data
                 return
             }
-            
+
             let roll = abs(data.attitude.roll)
             let pitch = abs(data.attitude.pitch)
-            
+
             // Pitch and roll will be close to 0 when the
             // device is flat
             let newValue = roll < 0.5 && pitch < 0.5
-            
+
             guard self.isFlat != newValue else {
                 // Orientation has not changed
                 return
             }
-            
+
+            //changes value to updated value after guarding if it's different
+            //(maybe unnecessary, because it just checked if it was different and found that it was not)
             self.isFlat = newValue
-            
+
             // UI an Audio updates should be done on main thread
             OperationQueue.main.addOperation {
                 // Notify the app that the isFlat value changed
@@ -72,7 +75,7 @@ class DeviceMotionManager: DeviceMotionProvider {
             }
         }
     }
-    
+
     func stopDeviceMotionUpdates() {
         GDLogMotionVerbose("Stopping device motion updates")
         motionManager.stopDeviceMotionUpdates()
