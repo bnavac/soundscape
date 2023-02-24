@@ -7,7 +7,9 @@
 //
 
 import Foundation
-
+///A struct that uses cached OSM data to estimate the user's location, including nearby POI's and the user's current POI
+///Though if there is no OSM data, it tries to use apple's geocoding stuff, so if the user does not know their current location
+///then the see current location button will return an error
 struct EstimatedLocationDetail {
     
     // MARK: Properties
@@ -21,7 +23,7 @@ struct EstimatedLocationDetail {
         self.name = name
         self.address = address
     }
-    
+    //This runs when the user tries to see their current location (presses the current location button).
     static func make(for value: LocationDetail, completion: @escaping (EstimatedLocationDetail) -> Void) {
         // Search for an OSM polygon containing the given location
         // using entities that are closest to the given location

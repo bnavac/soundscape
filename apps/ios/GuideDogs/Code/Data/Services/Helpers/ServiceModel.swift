@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+///
 class ServiceModel {
     enum StaticHTTPHeader {
         case version

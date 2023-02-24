@@ -290,10 +290,10 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
         
         return !failed
     }
-    
+    ///Takes a location as well as a distance to search for and returns ?
     func getDataView(for location: CLLocation, searchDistance: CLLocationDistance = SpatialDataContext.initialPOISearchDistance) -> SpatialDataViewProtocol? {
         var results: SpatialDataView?
-        
+        //Tell the queue to do something syncronously
         dispatchQueue.sync {
             let tile = VectorTile.tileForLocation(location, zoom: SpatialDataContext.zoomLevel)
             
