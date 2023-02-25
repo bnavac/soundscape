@@ -11,11 +11,15 @@
 //  Go to Code -> App -> Framework Extension -> MapKit -> MKMapViewDelegate+Extensions.swift
 //  LocationDetail is used in MKMapView, MKMapViewDelegate, and many more code files
 //  For the UI, maps uses LocationDetail to annotate the location and it
-//  LocationDetail holds RouteWaypoint which is related to Realm      <--add more here
+//  LocationDetail holds RouteWaypoint which is related to Realm
+//  
 
 import Foundation
 import MapKit
-import Combine
+import Combine     //  https://developer.apple.com/documentation/combine
+                   //  combine the output of multiple publishers and coordinate their interaction
+                   //  centralizes event-processing code and eliminates troublesome techniques like nested closures and convention-based callbacks
+
 
 protocol MapViewControllerDelegate: AnyObject {
     func didSelectAnnotation(_ annotation: MKAnnotation)

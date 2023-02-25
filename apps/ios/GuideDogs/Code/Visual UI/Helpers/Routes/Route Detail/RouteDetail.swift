@@ -5,6 +5,7 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
+//  Realm database uses id to store routes
 
 import CoreLocation
 import Combine

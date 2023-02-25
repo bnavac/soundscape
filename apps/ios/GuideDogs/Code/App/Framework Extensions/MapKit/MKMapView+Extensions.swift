@@ -5,6 +5,8 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
+//  configured maps, uses different types of detail to annotation coordinates and routes
+//  details uses RouteDetail Protocol which holds routes id from Reaml database
 
 import Foundation
 import MapKit
