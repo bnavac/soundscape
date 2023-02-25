@@ -28,7 +28,7 @@ enum SuperCategory: String {
     case authoredActivity = "authoredActivity"
     
     // MARK: Static Methods
-    
+    ///Returns a map of categories. Version does something?
     static func parseCategories(from: Data) -> (version: Int, categories: SuperCategories)? {
         do {
             guard let categoryJSON = try JSONSerialization.jsonObject(with: from) as? [String: Any] else {

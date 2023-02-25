@@ -12,6 +12,7 @@ import CoreLocation
 /// VectorTile is an object which identifies a single vector tile. This includes the x and y coordinates of
 /// the tile in the tile space, and the zoom level which specifies that tile space. Note that this class does
 /// not contain the actual POI contents of the tile (see TileData.swift).
+///
 class VectorTile: Hashable {
     enum VectorTileError: Error {
         case zoomValueOutOfRange
@@ -26,10 +27,27 @@ class VectorTile: Hashable {
     
     let x: Int
     let y: Int
+    //Zoom is the amount of detail that OSM will provide. Each level of zoom is determines
+    //the amount of tiles in OSM. For example, at zoom level 1, there are 4 tiles in the world
+    //each tile taking 2 bits of data to store its coordinates, (the tiles would be :
+    //00, 01, 10, 11). With increased detail we get more tiles, and at zoom level 16, we
+    //have enough detail to make 600m size tiles, each storing a 32 bit address
+    //Note that we will not need more than a zoom level 32 of, that amount of precision
+    //gets us down to 1cm size tiles.
+    //Though most of the functions will only go up to a zoom of 23, about the size
+    //of a person
+    //https://wiki.openstreetmap.org/wiki/Zoom_levels
     let zoom: UInt
+    //Note that we are using quadTiles, which are set up in xyxyxyxy format, with the
+    //level of detail going from less to more detailed as the number
+    //goes from left to right.
+    //Also, the coordinates are often stored in hex format.
     let quadKey: String
+    //
     let id: String
-    
+    //A square (or tile) of xy coords constructed using our own x and y.
+    //Returns an array of 5 coordinates that marks the bounds of the square
+    //I have no idea why it needs the 5th coord though
     private(set) lazy var polygon: [CLLocationCoordinate2D] = {
         let (startPixelX, startPixelY) = VectorTile.getPixelXY(tileX: self.x, tileY: self.y)
         let (endPixelX, endPixelY) = VectorTile.getPixelXY(tileX: self.x + 1, tileY: self.y + 1)
@@ -43,7 +61,7 @@ class VectorTile: Hashable {
                 CLLocationCoordinate2D(latitude: endLat, longitude: startLon),
                 CLLocationCoordinate2D(latitude: startLat, longitude: startLon)]
     }()
-    
+    //MARK: Initializers
     /// Initializes a VectorTile object from a JSON object which must have keys "X", "Y", "ZoomLevel", "QuadKey", and "Id"
     ///
     /// - Parameter json: JSON object to parse
@@ -126,7 +144,10 @@ class VectorTile: Hashable {
     static func == (lhs: VectorTile, rhs: VectorTile) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y && lhs.zoom == rhs.zoom
     }
-    
+    ///Combines the x, y, and z and uses a randomly generated seed to hash them together
+    ///Note that the seed, and thus the hash, will change on each execution of the program
+    ///Also different versions of the function may exists depending on the standary library
+    ///Also do not store the hash across executions
     func hash(into hasher: inout Hasher) {
         hasher.combine(x)
         hasher.combine(y)
@@ -177,7 +198,7 @@ class VectorTile: Hashable {
     }
     
     /// Clips a value to the range [max, min]
-    ///
+    /// In other words, it sets the value to either the min, max, or somewhere in between
     /// - Parameters:
     ///   - value: Value to clip
     ///   - minimum: Minimum value
@@ -193,6 +214,7 @@ class VectorTile: Hashable {
     /// - Returns: Side length of the map in pixels
     static func mapSize(zoom: UInt) -> UInt {
         let base: UInt = 256
+        //Shifts base by zoom, or multiplies base by 2^zoom, or base * 2^zoom
         return base << zoom
     }
     

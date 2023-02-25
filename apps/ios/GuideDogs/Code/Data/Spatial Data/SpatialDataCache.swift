@@ -37,7 +37,7 @@ extension SpatialDataCache {
         }
     }
 }
-
+///
 class SpatialDataCache: NSObject {
     
     // MARK: Geocoders
@@ -58,11 +58,11 @@ class SpatialDataCache: NSObject {
     private static let osmPoiSearchProvider = OSMPOISearchProvider()
     
     static func useDefaultSearchProviders() {
-        register(provider: osmPoiSearchProvider)
-        register(provider: AddressSearchProvider())
-        register(provider: GenericLocationSearchProvider())
+        register(provider: osmPoiSearchProvider)//Searches for POIs using OSM data, likely primary provider
+        register(provider: AddressSearchProvider())//Most likely returns the destination POI
+        register(provider: GenericLocationSearchProvider())//Generic Locations are typically the user's location
     }
-    
+    //Adds a provider to the list of providers if the provider exists.
     static func register(provider: POISearchProviderProtocol) {
         guard !poiSearchProviders.contains(where: { $0.providerName == provider.providerName }) else {
             return
@@ -76,7 +76,7 @@ class SpatialDataCache: NSObject {
     }
  
     // MARK: Realm Search
-    
+    ///Gets every poi from each provider that we have
     fileprivate static func objectsFromAllProviders(predicate: NSPredicate) -> [POI] {
         var pois: [POI] = []
         
@@ -87,7 +87,7 @@ class SpatialDataCache: NSObject {
         
         return pois
     }
-    
+    ///
     static func genericLocationsNear(_ location: CLLocation, range: CLLocationDistance? = nil) -> [POI] {
         guard let index = poiSearchProviders.firstIndex(where: { $0.providerName == "GenericLocationSearchProvider" }) else {
             return []
@@ -144,7 +144,7 @@ class SpatialDataCache: NSObject {
             return database.object(ofType: Route.self, forPrimaryKey: key)
         }
     }
-    
+    //Runs when the user clicks "places nearby".
     static func routes(withPredicate predicate: NSPredicate? = nil) -> [Route] {
         return autoreleasepool {
             guard let database = try? RealmHelper.getDatabaseRealm() else {
@@ -152,7 +152,10 @@ class SpatialDataCache: NSObject {
             }
             
             let results: Results<Route>
-            
+            ///https://wiki.openstreetmap.org/wiki/Xapi#Predicates
+            ///A predicate is a selector which determines which objects to get, for example the predicate
+            ///"ammenity = hospital' will get every any amenity whose value is hospital. You can also chain predicates
+            ///such as way[highway=motorway|motorway_link|trunk|primary], or way[highway=*].
             if let predicate = predicate {
                 results = database.objects(Route.self).filter(predicate)
             } else {
@@ -195,7 +198,7 @@ class SpatialDataCache: NSObject {
     static func containsReferenceEntity(withKey key: String) -> Bool {
         return referenceEntityByKey(key) != nil
     }
-    
+    ///
     static func referenceEntities(with predicate: NSPredicate) -> [ReferenceEntity] {
         return autoreleasepool {
             guard let database = try? RealmHelper.getDatabaseRealm() else {
@@ -366,7 +369,7 @@ class SpatialDataCache: NSObject {
     }
     
     // MARK: VectorTile Tools
-    
+    ///Returns either the tiles that are needed in order to go to a destination, or the tiles inside of a reference marker
     static func tiles(forDestinations: Bool, forReferences: Bool, at zoomLevel: UInt) -> Set<VectorTile> {
         var tiles: Set<VectorTile> = []
         

@@ -28,11 +28,11 @@ extension CloudKeyValueStore {
     private var markerKeys: [String] {
         return allKeys.filter { $0.hasPrefix(CloudKeyValueStore.markerKeyPrefix) }
     }
-    
+    ///Returns all non-nill keys in markerParameters
     private var markerParametersObjects: [MarkerParameters] {
         return markerKeys.compactMap { markerParameters(forKey: $0) }
     }
-    
+    ///Takes in a key (from where?) for a marker and returns the information about that marker.
     private func markerParameters(forKey key: String) -> MarkerParameters? {
         guard let data = object(forKey: key) as? Data else { return nil }
         
@@ -59,7 +59,8 @@ extension CloudKeyValueStore {
     private static func id(for referenceEntityKey: String) -> String {
         return referenceEntityKey.replacingOccurrences(of: CloudKeyValueStore.markerKeyPrefix + ".", with: "")
     }
-    
+    /// Takes in a ReferenceEntity, an object that has information about a marker, and tries to encode it into
+    /// json, it then stores that JSON data in the server.
     func store(referenceEntity: ReferenceEntity) {
         if let markerParameters = MarkerParameters(marker: referenceEntity) {
             let encoder = JSONEncoder()
@@ -78,7 +79,6 @@ extension CloudKeyValueStore {
             GDATelemetry.track("marker_backup.error.parameters_failed_to_initialize")
         }
     }
-    
     func update(referenceEntity: ReferenceEntity) {
         // For iCloud key-value store we override the current value
         store(referenceEntity: referenceEntity)
@@ -89,7 +89,11 @@ extension CloudKeyValueStore {
     }
     
     // MARK: Bulk Set/Get
-    
+    ///Stores reference entities in (where?) if this is the first time launching the app, or if the user changes their icloud account
+    /// - Parameters:
+    ///  -reason: The reason as to why we need to sync entities in the first place
+    ///  -changedKeys: An array containing all of the changes keys from (where?) and this device
+    ///  -completion: ?
     func syncReferenceEntities(reason: CloudKeyValueStoreChangeReason, changedKeys: [String]? = nil, completion: CompletionHandler = nil) {
         // Importing
         importChanges(changedKeys: changedKeys) { [weak self] in
@@ -101,10 +105,8 @@ extension CloudKeyValueStore {
             completion?()
         }
     }
-    
     private func importChanges(changedKeys: [String]? = nil, completion: CompletionHandler = nil) {
         var markerParametersObjects = self.markerParametersObjects
-        
         // If there are changed keys, we only add/update those objects.
         // If there no changed keys, such as an initial sync or account change we add/update all objects.
         if let changedKeys = changedKeys {
@@ -136,7 +138,8 @@ extension CloudKeyValueStore {
             completion?()
             return
         }
-        
+        // A dispatch group is a way to organize similar tasks that should be done
+        //asynchronously but also need to all be done in order to move onto the next thing.
         let group = DispatchGroup()
         
         for markerParameters in markerParametersObjects {
@@ -150,7 +153,7 @@ extension CloudKeyValueStore {
             completion?()
         })
     }
-    
+    ///Imports a marker into the database
     private func importChanges(markerParameters: MarkerParameters, completion: (() -> Void)? = nil) {
         // We load the underlying entity which either finds it in the local database,
         // or initializes and store a new underlying entity

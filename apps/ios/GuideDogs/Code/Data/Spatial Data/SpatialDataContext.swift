@@ -9,7 +9,9 @@
 import Foundation
 import RealmSwift
 import CoreLocation
-
+/*
+ * An enum for the possible values of the state variable in spatialDataContext
+ */
 enum SpatialDataState {
     case error
     case loadingCategories
@@ -17,7 +19,7 @@ enum SpatialDataState {
     case loading
     case ready
 }
-
+// An enum for the possible values of the error variable in SpatialDataContext
 enum SpatialDataContextError: Error {
     case noCategories
     case missingData
@@ -28,8 +30,7 @@ extension Notification.Name {
     static let tilesDidUpdate = Notification.Name("TilesDidUpdate")
     static let locationUpdated = Notification.Name("GDALocationUpdated")
 }
-
-// MARK: -
+//Ok this a big class where a lot of stuff happens
 
 class SpatialDataContext: NSObject, SpatialDataProtocol {
     
@@ -42,15 +43,23 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
     }
     
     // MARK: - Properties
-    
+    //A read only constant which is how much detail in OSM that we will use, at 16
+    //tiles we have tiles 600 meters in size, where each tile takes a 32-bit hex value
+    //to represent its location in the world.
     static let zoomLevel: UInt = 16
+    //a constant which is the maximum distance that we will search for POIs to be cached
     static let cacheDistance: CLLocationDistance = 1000
+    //The default distance with which to search for POIs
     static let initialPOISearchDistance: CLLocationDistance = 200
+    //When expanding the amount of POIs we want to cache, this is added to the current search distance
     static let expansionPOISearchDistance: CLLocationDistance = 200
+    //The amount of time in before the app will check the users location
     static let refreshTimeInterval: TimeInterval = 5.0
+    //The amount of distance the user moves before the app will check its location
     static let refreshDistanceInterval: CLLocationDistance = 5.0
 
     private(set) weak var geolocationManager: GeolocationManagerProtocol?
+    
     private(set) var motionActivityContext: MotionActivityProtocol
 
     private weak var deviceContext: UIDeviceManager!
@@ -72,7 +81,7 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
     private var toFetch: [VectorTile] = []
     
     // MARK: Synchronized Properties
-    
+    //Note that the dispatch queues do not run on any server, the label is just for debugging
     private let networkQueue = DispatchQueue(label: "com.company.appname.spatialdata.network", qos: .utility)
     private var dispatchQueue = DispatchQueue(label: "com.company.appname.spatialdata", qos: .utility, attributes: .concurrent)
     private var fetchingTiles = false
@@ -112,7 +121,6 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
         
         return VectorTile.tileForLocation(location, zoom: SpatialDataContext.zoomLevel)
     }
-    
     var loadedSpatialData: Bool {
         var loadedSpatialData = false
         
@@ -179,7 +187,7 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
                                                name: .cloudKeyValueStoreDidChange,
                                                object: nil)
     }
-    
+    ///Helper function to initalize the user's location and check if they are connected to the internet
     @objc private func onAppDidInitialize() {
         // Run the initial spatial data update
         
@@ -213,7 +221,8 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
         
         updateSpatialDataAsync(location: location)
     }
-    
+    ///Begins to update the users location, as well as the users rotation and movements, finally, it syncs info from the
+    ///users iCloud, namely the markers and routes that they set.
     func start() {
         geolocationManager?.updateDelegate = self
         
@@ -281,10 +290,10 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
         
         return !failed
     }
-    
+    ///Takes a location as well as a distance to search for and returns ?
     func getDataView(for location: CLLocation, searchDistance: CLLocationDistance = SpatialDataContext.initialPOISearchDistance) -> SpatialDataViewProtocol? {
         var results: SpatialDataView?
-        
+        //Tell the queue to do something syncronously
         dispatchQueue.sync {
             let tile = VectorTile.tileForLocation(location, zoom: SpatialDataContext.zoomLevel)
             
@@ -762,7 +771,13 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
             }
         }
     }
-    
+    /// Reads in a json file from bundler(?), parses it into a list of categories, and then returns that
+    /// The JSON file also returns a version when it is parsed into categories, and we use that to determine if tiles are
+    /// out of date; if the version changes, then we check if the tiles are out of date.
+    /// - Parameters:
+    ///  -None
+    /// - Returns:
+    ///     - A list of supercategories
     private class func loadDefaultCategories() -> SuperCategories? {
         GDLogAppInfo("Loading default super categories")
         

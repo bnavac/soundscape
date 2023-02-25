@@ -49,9 +49,11 @@ class CloudKeyValueStore {
     }
     
     // MARK: Properties
-
+    //A NSU...Store is a way to store use preferences in the user's icloud account
+    //allowing for preferences to be saved and transfered across devices,
+    //likely as an array of key-value pairs
     var keyValueStore: NSUbiquitousKeyValueStore?
-    
+    //A set of strings which is just every key in the NSUKV stored as a dictionary
     var allKeys: Set<String> {
         guard let keyValueStore = keyValueStore else { return [] }
         return Set(keyValueStore.dictionaryRepresentation.keys)
@@ -63,22 +65,22 @@ class CloudKeyValueStore {
 
     func start() {
         keyValueStore = NSUbiquitousKeyValueStore.default
-        
+        //Adds an observer to monitor if the app is active
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(appDidBecomeActive),
                                                name: NSNotification.Name.appDidBecomeActive,
                                                object: nil)
-        
+        //Adds an observer to monitor if the user has completed onboarding
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(appDidBecomeActive),
                                                name: .onboardingDidComplete,
                                                object: nil)
-        
+        //Adds an observer to monitor
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(storeDidChange),
                                                name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
                                                object: keyValueStore)
-        
+        //Another observer to monitor if the user has completed onboarding
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onboardingDidComplete),
                                                name: .onboardingDidComplete,
@@ -98,13 +100,13 @@ class CloudKeyValueStore {
     }
     
     // MARK: Getting Values
-
+    ///Returns the value associated with a key
     func object(forKey key: String) -> Any? {
         return keyValueStore?.object(forKey: key) ?? nil
     }
     
     // MARK: Setting Values
-
+    ///Sets the value at a key to the object param
     func set(object: Any?, forKey key: String) {
         guard let keyValueStore = keyValueStore else {
             GDLogCloudInfo("KV store not initialized. Call `start()` before calling this method.")
@@ -116,13 +118,13 @@ class CloudKeyValueStore {
         
         synchronize()
     }
-    
+    ///TODO: Figure out what this does
     func set(dictionary: [String: Any], forKey key: String) {
         set(object: dictionary, forKey: key)
     }
     
     // MARK: Removing Values
-
+    
     func removeAllObjects() {
         for key in allKeys {
             removeObject(forKey: key)
