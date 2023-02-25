@@ -50,7 +50,8 @@ class HapticEngine {
         }
     }
     
-    /// Test
+    /// Determines whether the device supports haptic playback.
+    /// - Returns: `true` if the device supports haptics.
     static var supportsHaptics: Bool {
         return CHHapticEngine.capabilitiesForHardware().supportsHaptics
     }
