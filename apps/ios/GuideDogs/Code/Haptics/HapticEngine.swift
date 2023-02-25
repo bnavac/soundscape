@@ -50,6 +50,7 @@ class HapticEngine {
         }
     }
     
+    /// Test
     static var supportsHaptics: Bool {
         return CHHapticEngine.capabilitiesForHardware().supportsHaptics
     }
