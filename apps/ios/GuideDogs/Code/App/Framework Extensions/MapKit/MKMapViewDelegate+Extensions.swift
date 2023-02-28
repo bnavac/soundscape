@@ -5,6 +5,13 @@
 //  Copyright (c) Microsoft Corporation.
 //  Licensed under the MIT License.
 //
+// Delegate property of MapView
+// 4 types of annotations:
+// 1. LocationDetailAnnotation
+// 2. WaypointDetailAnnotation and can show callout
+// 3. WaypointDetailAnnotation and cannot show callout
+// 4. MKClusterAnnotation
+// return MKAnnotationView
 
 import Foundation
 import MapKit

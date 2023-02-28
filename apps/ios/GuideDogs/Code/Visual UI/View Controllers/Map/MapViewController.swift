@@ -12,7 +12,8 @@
 //  LocationDetail is used in MKMapView, MKMapViewDelegate, and many more code files
 //  For the UI, maps uses LocationDetail to annotate the location and it
 //  LocationDetail holds RouteWaypoint which is related to Realm
-//  
+//
+//  Annotation is MKAnnotation, manages the data that you want to display on the map surface.
 
 import Foundation
 import MapKit
@@ -20,7 +21,7 @@ import Combine     //  https://developer.apple.com/documentation/combine
                    //  combine the output of multiple publishers and coordinate their interaction
                    //  centralizes event-processing code and eliminates troublesome techniques like nested closures and convention-based callbacks
 
-
+// didSelect tells the delegate when the user selects one or more of its annotation views.
 protocol MapViewControllerDelegate: AnyObject {
     func didSelectAnnotation(_ annotation: MKAnnotation)
 }
@@ -28,6 +29,9 @@ protocol MapViewControllerDelegate: AnyObject {
 class MapViewController: UIViewController {
     
     // MARK: `IBOutlet`
+    // IBOutlet is a tag connected to an property declaration so that the Interface Builder
+    // application can recognize the property as an outlet and sync the display and connection
+    // of it with Xcode
     
     @IBOutlet private weak var mapView: MKMapView!
     
@@ -47,7 +51,10 @@ class MapViewController: UIViewController {
     }
     
     // MARK: View Life Cycle
+    // https://medium.com/good-morning-swift/ios-view-controller-life-cycle-2a0f02e74ff5
+    // thing to do during the view controller life cycle
     
+    // called when all views are loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +64,8 @@ class MapViewController: UIViewController {
         mapView.accessibilityElementsHidden = true
     }
     
+    // called every time before the view is visible to and before any animation is configured
+    // override this method to perform custom tasks associated with displaying the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -96,6 +105,7 @@ class MapViewController: UIViewController {
         })
     }
     
+    // called before the view is removed from the view hierarchy
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -105,7 +115,7 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
+    // calls functions in MKMapViewDelegate
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? LocationDetailAnnotation {
             return self.mapView(mapView, viewForLocationDetailAnnotation: annotation)
@@ -133,7 +143,11 @@ extension MapViewController: MKMapViewDelegate {
         
         return nil
     }
-    
+    // Using DispatchQueue.main makes sure UI updates on the main queue
+    // Using async to avoid blocking the current thread
+    // https://www.donnywals.com/appropriately-using-dispatchqueue-main/
+    // return out the function if failed -> self is the same or annotation is the same
+    // otherwise do didSelectAnnotation
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else {
