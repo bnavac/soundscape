@@ -11,3 +11,7 @@ IMPOSM with the '--output=flex' and an appropriate LUA style.
 
 You will need the new-york-latest.osm.pbf file as well as the rpi.geojson files to import a tile into the database.
 Use the command ./imposm import -mapping mapping.yml -read new-york-latest.osm.pbf -write -connection postgis://username:password@host:port/postgres -limitto rpi.geojson
+
+http://download.geofabrik.de/, get osm.pbf tiles from here
+https://geojson.io, get a geojson area from here.
+Do not edit the mapping.yml file.
