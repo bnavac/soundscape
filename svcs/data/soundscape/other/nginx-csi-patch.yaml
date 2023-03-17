@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-
-controller:
+# So far, this appears to be a file which helps to manage a key provider for the kubernetes disks (csis).
+# TODO: Add further confirmation to this.
   extraVolumes:
       - name: secrets-store-inline
         csi:
