@@ -1,6 +1,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-
+# Creates a cbl mariner image and install python and pip into a directory called staging.
+# It then creates another image and copies into it gentiles.py, creating it as an entrypoint.
 FROM mcr.microsoft.com/cbl-mariner/base/core:2.0 as installer
 
 RUN tdnf -y update \
