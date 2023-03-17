@@ -1,6 +1,6 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-
+# Used in the osm importer to specify what tags and other objects that we want in the database.
 tags:
   load_all: true
   exclude:
