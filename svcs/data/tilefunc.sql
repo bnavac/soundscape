@@ -1,5 +1,6 @@
 -- Copyright (c) Microsoft Corporation.
 -- Licensed under the MIT License.
+-- Creates the function soundscape tile which returns a table containing the data for a tile. Basically, it creates a tile, using data from the database.
 
 CREATE OR REPLACE FUNCTION
    soundscape_tile (zoom int, tile_x int, tile_y int)
