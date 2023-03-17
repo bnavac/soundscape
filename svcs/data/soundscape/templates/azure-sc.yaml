@@ -1,6 +1,6 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-
+# A template to create new kubernetes clusters.
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
