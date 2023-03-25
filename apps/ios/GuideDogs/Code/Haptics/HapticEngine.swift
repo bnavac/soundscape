@@ -9,36 +9,38 @@
 import CoreHaptics
 
 
-/// ``HapticEngine`` is a helper or wrapper class for creating and triggering haptic feedback on iOS devices using `CoreHaptics` framework. It provides a unified API for creating and managing feedback generators of three different types: ``UIImpactFeedbackGenerator``, ``UISelectionFeedbackGenerator``, and ``UINotificationFeedbackGenerator``.
+/// `HapticEngine` is a helper or wrapper class for creating and triggering haptic feedback on iOS devices using `CoreHaptics` framework.
+///
+/// It provides a unified API for creating and managing feedback generators of three different types: `UIImpactFeedbackGenerator`, `UISelectionFeedbackGenerator`, and `UINotificationFeedbackGenerator`.
 class HapticEngine {
     /// Contains all loaded `UIFeedbackGenerator`.
     private var generators: [UIFeedbackGenerator] = []
     
     /// ``FeedbackStyle`` is a combined enumeration of the all the types of feedbacks from the main feedback generators.
     enum FeedbackStyle {
-        /// The `.heavy` style from ``UIImpactFeedbackGenerator``.
+        /// The `.heavy` style from `UIImpactFeedbackGenerator`.
         case impactHeavy
-        /// The `.light` style from ``UIImpactFeedbackGenerator``.
+        /// The `.light` style from `UIImpactFeedbackGenerator`.
         case impactLight
-        /// The `.medium` style from ``UIImpactFeedbackGenerator``.
+        /// The `.medium` style from `UIImpactFeedbackGenerator`.
         case impactMedium
-        /// The `.rigid` style from ``UIImpactFeedbackGenerator``.
+        /// The `.rigid` style from `UIImpactFeedbackGenerator`.
         case impactRigid
-        /// The `.soft` style from ``UIImpactFeedbackGenerator``.
+        /// The `.soft` style from `UIImpactFeedbackGenerator`.
         case impactSoft
         
-        /// The feedback style from ``UISelectionFeedbackGenerator``.
+        /// The feedback style from `UISelectionFeedbackGenerator`.
         case selection
         
-        /// The `.error` style from ``UINotificationFeedbackGenerator``.
+        /// The `.error` style from `UINotificationFeedbackGenerator`.
         case error
-        /// The `.success` style from ``UINotificationFeedbackGenerator``.
+        /// The `.success` style from `UINotificationFeedbackGenerator`.
         case success
-        /// The `.warning` style from ``UINotificationFeedbackGenerator``.
+        /// The `.warning` style from `UINotificationFeedbackGenerator`.
         case warning
         
-        /// Converts a ``FeedbackStyle`` style to a ``UIImpactFeedbackGenerator`` style.
-        /// - Returns: The corresponding ``UIImpactFeedbackGenerator`` style, or ``nil`` if the ``FeedbackStyle`` does not apply.
+        /// Converts a `FeedbackStyle` style to a `UIImpactFeedbackGenerator` style.
+        /// - Returns: The corresponding `UIImpactFeedbackGenerator` style, or `nil` if the `FeedbackStyle` does not apply.
         func toImpactFeedbackStyle() -> UIImpactFeedbackGenerator.FeedbackStyle? {
             switch self {
             case .impactHeavy: return .heavy
@@ -50,8 +52,8 @@ class HapticEngine {
             }
         }
         
-        /// Converts a ``FeedbackStyle`` style to a ``UINotificationFeedbackGenerator`` style.
-        /// - Returns: The corresponding ``UINotificationFeedbackGenerator`` style, or ``nil`` if the ``FeedbackStyle`` does not apply.
+        /// Converts a `FeedbackStyle` style to a `UINotificationFeedbackGenerator` style.
+        /// - Returns: The corresponding `UINotificationFeedbackGenerator` style, or `nil` if the `FeedbackStyle` does not apply.
         func toNotificationFeedbackType() -> UINotificationFeedbackGenerator.FeedbackType? {
             switch self {
             case .error: return .error
@@ -160,9 +162,16 @@ class HapticEngine {
     }
 }
 
+/// A wrapper class for `UIImpactFeedbackGenerator`, which stores the feedback style of the generator for use in the `supports(_:)` and `make(supporting:)` functions.
+///
+/// The `UIImpactFeedbackGenerator` does not store the `style` of the generator for acces normally, so this wrapper exists to provide that detail.
 private class ImpactFeedbackGeneratorWrapper: UIImpactFeedbackGenerator {
+    /// The current style of the generator.
     let style: UIImpactFeedbackGenerator.FeedbackStyle
     
+    /// Generates a `UIImpactFeedbackGenerator` for a specific `FeedbackStyle`.
+    ///
+    /// - Parameter style: The `FeedbackStyle` to create from the generator.
     override init(style: UIImpactFeedbackGenerator.FeedbackStyle) {
         self.style = style
         super.init(style: style)
@@ -170,6 +179,12 @@ private class ImpactFeedbackGeneratorWrapper: UIImpactFeedbackGenerator {
 }
 
 private extension UIFeedbackGenerator {
+    /// Determines if the `UIFeedbackGenerator` supports a certain `FeedbackStyle`.
+    ///
+    /// - Parameters:
+    ///   - style: The style of feedback to check for support.
+    ///
+    /// - Returns: `true` if the generator supports the feedback `style`.
     func supports(_ style: HapticEngine.FeedbackStyle) -> Bool {
         switch style {
         case .impactHeavy, .impactLight, .impactMedium, .impactRigid, .impactSoft:
@@ -187,6 +202,12 @@ private extension UIFeedbackGenerator {
         }
     }
     
+    /// Creates a `UIFeedbackGenerator` that supports the feedback `style`.
+    ///
+    /// - Parameters:
+    ///   - style: The style of feedback to create a generator from.
+    ///
+    /// - Returns: A `UIFeedbackGenerator` that supports `style`.
     static func make(supporting style: HapticEngine.FeedbackStyle) -> UIFeedbackGenerator {
         switch style {
         case .impactHeavy, .impactLight, .impactMedium, .impactRigid, .impactSoft:
