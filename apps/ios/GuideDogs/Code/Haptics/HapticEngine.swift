@@ -8,27 +8,36 @@
 
 import CoreHaptics
 
-/// A helper/wrapper class for the three concrete implementations of `UIFeedbackGenerator`. `HapticEngine`
-/// acts as a unified API for creating and triggering feedback generators.
+
+/// ``HapticEngine`` is a helper or wrapper class for creating and triggering haptic feedback on iOS devices using `CoreHaptics` framework. It provides a unified API for creating and managing feedback generators of three different types: ``UIImpactFeedbackGenerator``, ``UISelectionFeedbackGenerator``, and ``UINotificationFeedbackGenerator``.
 class HapticEngine {
     private var generators: [UIFeedbackGenerator] = []
     
+    /// ``FeedbackStyle`` is a combined enumeration of the all the types of feedbacks from the main feedback generators.
     enum FeedbackStyle {
-        // UIImpactFeedbackGenerator
+        /// The `.heavy` style from ``UIImpactFeedbackGenerator``.
         case impactHeavy
+        /// The `.light` style from ``UIImpactFeedbackGenerator``.
         case impactLight
+        /// The `.medium` style from ``UIImpactFeedbackGenerator``.
         case impactMedium
+        /// The `.rigid` style from ``UIImpactFeedbackGenerator``.
         case impactRigid
+        /// The `.soft` style from ``UIImpactFeedbackGenerator``.
         case impactSoft
         
-        // UISelectionFeedbackGenerator
+        /// The feedback style from ``UISelectionFeedbackGenerator``.
         case selection
         
-        // UINotificationFeedbackGenerator
+        /// The `.error` style from ``UINotificationFeedbackGenerator``.
         case error
+        /// The `.success` style from ``UINotificationFeedbackGenerator``.
         case success
+        /// The `.warning` style from ``UINotificationFeedbackGenerator``.
         case warning
         
+        /// Converts a ``FeedbackStyle`` style to a ``UIImpactFeedbackGenerator`` style.
+        /// - Returns: The corresponding ``UIImpactFeedbackGenerator`` style, or ``nil`` if the ``FeedbackStyle`` does not apply.
         func toImpactFeedbackStyle() -> UIImpactFeedbackGenerator.FeedbackStyle? {
             switch self {
             case .impactHeavy: return .heavy
@@ -40,6 +49,8 @@ class HapticEngine {
             }
         }
         
+        /// Converts a ``FeedbackStyle`` style to a ``UINotificationFeedbackGenerator`` style.
+        /// - Returns: The corresponding ``UINotificationFeedbackGenerator`` style, or ``nil`` if the ``FeedbackStyle`` does not apply.
         func toNotificationFeedbackType() -> UINotificationFeedbackGenerator.FeedbackType? {
             switch self {
             case .error: return .error
