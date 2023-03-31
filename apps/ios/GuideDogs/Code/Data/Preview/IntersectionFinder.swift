@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreLocation
-
+//MARK: Creates intersections and finds the nearby types of them
 /// A helper to find nearby intersections
 struct IntersectionFinder {
     

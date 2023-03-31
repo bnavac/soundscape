@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//MARK: Reads out call outs and in theory happens when the OSM preview street view function is called 
 /// Represents an edge in the rooted graph that Location Previews operate over
 protocol AdjacentDataView {
     associatedtype Path: Orientable, Equatable

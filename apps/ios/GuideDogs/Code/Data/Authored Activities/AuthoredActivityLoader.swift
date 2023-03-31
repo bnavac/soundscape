@@ -12,7 +12,7 @@
 import Foundation
 import CoreLocation
 import iOS_GPX_Framework
-//test
+//MARK: Pulls down the meta data from the server 
 enum ActivityLoaderError: Error {
     case loadingError
     case urlUnavailable

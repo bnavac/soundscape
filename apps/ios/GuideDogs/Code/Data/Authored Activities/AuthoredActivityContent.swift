@@ -10,7 +10,7 @@ import Foundation
 import iOS_GPX_Framework
 
 // MARK: - Data Models
-
+//MARK: Stores/Pulls all information for a waypoint including description and location
 struct ActivityWaypointImage {
     /// Network URL for the image
     let url: URL

@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+//MARK: Connected to Soundscape previews
+//MARK: Reads call outs when a person reaches their location 
 /// A rooted graph data structure representing a point at which a user can make a decision
 /// about where to move next in a location preview.
 protocol RootedPreviewGraph {

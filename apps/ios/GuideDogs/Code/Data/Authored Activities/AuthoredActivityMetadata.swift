@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//MARK: Where it pulls down the list of locations around a person / convenience class
 /// Data structure for keeping track of the shared content experiences that can be downloaded
 struct AuthoredActivityMetadata: Codable, CustomStringConvertible {
     
