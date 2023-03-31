@@ -12,7 +12,7 @@
 import Foundation
 import CoreLocation
 import iOS_GPX_Framework
-
+//test
 enum ActivityLoaderError: Error {
     case loadingError
     case urlUnavailable
