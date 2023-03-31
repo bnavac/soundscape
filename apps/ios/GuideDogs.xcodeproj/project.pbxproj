@@ -874,6 +874,7 @@
 		D29832961E4E249700352A5A /* GeoJsonGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29832951E4E249700352A5A /* GeoJsonGeometry.swift */; };
 		D30355D31B61401D00E1DDED /* GDAJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D30355D21B61401D00E1DDED /* GDAJSONObject.m */; };
 		D395B0F71B41DA15005A6407 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D395B0F61B41DA15005A6407 /* Images.xcassets */; };
+		F6F1638B29D7842500283046 /* Empty.html in Resources */ = {isa = PBXBuildFile; fileRef = F6F1638A29D7842500283046 /* Empty.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1799,6 +1800,7 @@
 		D3E2A6361CAD5CA100A5192A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		DAEDD72453A8268FBA604D2F /* Pods_Soundscape.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Soundscape.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C725071707AF59CE42CF40 /* Pods-Soundscape.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Soundscape.adhoc.xcconfig"; path = "Target Support Files/Pods-Soundscape/Pods-Soundscape.adhoc.xcconfig"; sourceTree = "<group>"; };
+		F6F1638A29D7842500283046 /* Empty.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Empty.html; path = ../../Empty.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4995,6 +4997,7 @@
 				B971F0A71EE2B37B0001CAF1 /* AppContext.swift */,
 				62E2B86925AD2A910008AF5D /* BuildSettings.swift */,
 				5684808F1CBC975E004B4227 /* Soundscape-Bridging-Header.h */,
+				F6F1638A29D7842500283046 /* Empty.html */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -5356,6 +5359,7 @@
 				2896376D26D6E39D001694C0 /* Tactile_OnAxis.wav in Resources */,
 				C35D99AB206EBE960025446C /* POITableViewCell.xib in Resources */,
 				2872D13D26D80C59000BE465 /* Mallet_Slow_Behind.wav in Resources */,
+				F6F1638B29D7842500283046 /* Empty.html in Resources */,
 				568480891CB73F51004B4227 /* main.storyboard in Resources */,
 				31569D2920EBF15400FD7B35 /* MarkerTutorial.storyboard in Resources */,
 				C30DBD2823AA90A000082B27 /* SearchTableViewCell.xib in Resources */,
