@@ -1,6 +1,15 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-
+#The file starts by using a cbl mariner base for its image.
+#CBL Mariner is a linux OS developed my Microsoft and is used primarily in Azure, WSL, and other Microsoft systems, and since we are using Azure, here we are.
+#It then tries to make the directories ingest and staging (tdnf is the package manager for Photon OS), and tries to install python and some extensions into staging.
+#Note that this step is where we are running into bugs, so it would be helpful if someone could find a solution to this.
+#It then creates a new image also using cbl, this image is supposed to import osm tiles into the database using imposm3.
+#Finally, it creates the cbl image "final" based on the distroless image, which is a minimalist image compared to "base".
+#This image copies something from the ingest and staging image (TODO: Figure out what and why).
+#It copies several files onto the image (TODO:Figure out why it imports what it does).
+#Finally, it runs a command which removes .pbf files (an osm tile repackaged into a format for the importer to be able to read).
+#As well as cached titles, expired tiles, and diff tiles. It then runs a command which imports tiles into the database. See imposm3 or the readme for more details.
 FROM mcr.microsoft.com/cbl-mariner/base/core:2.0 as installer
 
 RUN mkdir /ingest \
