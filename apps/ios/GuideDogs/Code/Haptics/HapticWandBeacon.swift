@@ -146,7 +146,7 @@ class HapticWandBeacon: HapticBeacon {
                 /// Return the audio and volume to play.
                 return (PreviewWandAsset.noTarget, Float(volume))
             }
-            /// Return nil if the input is not of type "heading".
+            /// Return nil if the input is not of type heading.
             return nil
         }
 
