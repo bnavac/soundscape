@@ -1,0 +1,7 @@
+#Because the original services files has several issues, we will instead attempt to use other services to serve tiles. One of which is tegola. This is the in-progress config file for a Tegola Server.
+tile_buffer = 64
+[[providers]]
+name = "audialserver"
+type = "postgis"
+uri = "audialpostgis.postgres.database.azure.com:username:password@host:5432/tegola"
+#We will update this command later on Tuesday after speaking to Lucien.
