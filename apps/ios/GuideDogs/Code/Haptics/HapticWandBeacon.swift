@@ -10,40 +10,46 @@ import CoreLocation
 import Combine
 
 class HapticWandBeacon: HapticBeacon {
-    /// Haptic engine for rendering haptics for the physical UI at decision points
+    /// Haptic engine for rendering haptics for the physical UI at decision points.
     private let engine = HapticEngine()
     
-    /// Wand for tracking when the user is pointing their phone at the beacon's
-    /// location so that corresponding haptics can be triggered appropriately
+    /// Wand for tracking when the user is pointing their phone at the beacon's location so that corresponding haptics can be triggered appropriately.
     private let wand = PreviewWand()
     
-    /// Angular window over which the wand audio plays surrounding the bearing to the beacon
+    /// Angular window over which the wand audio plays surrounding the bearing to the beacon.
     private let audioWindow = 60.0
     
-    /// ID for the beacon that plays ambient audio when the wand isn't pointed at a road
+    /// Identifier for the beacon that plays ambient audio when the wand isn't pointed at a road.
     private(set) var beacon: AudioPlayerIdentifier?
     
+    /// The location of this beacon.
     private var beaconLocation: CLLocation
     
+    /// Whether the beacon is focused. An unfocused beacon does not produce sound.
     private var isBeaconFocussed = false
     
+    /// If the phone is flat, beacon audio is played.
     private var phoneIsFlat: Bool = false
+    /// A subscription to the orientation of the iPhone.
     private var deviceOrientationToken: AnyCancellable?
     
     static var description: String {
         return String(describing: self)
     }
     
+    /// Set the location of the beacon.
     required init(at: CLLocation) {
         beaconLocation = at
         wand.delegate = self
     }
     
+    /// Remove the subscription to the iPhone orientation when object is de-allocated.
     deinit {
         deviceOrientationToken?.cancel()
         deviceOrientationToken = nil
     }
     
+    /// Start up the haptics for this particular beacon.
     func start() {
         guard let orientation = BeaconOrientation(beaconLocation) else {
             return
@@ -66,6 +72,7 @@ class HapticWandBeacon: HapticBeacon {
         wand.start(with: [target], heading: heading)
     }
     
+    /// Stop the haptics for this current beacon.
     func stop() {
         deviceOrientationToken?.cancel()
         deviceOrientationToken = nil
@@ -79,7 +86,8 @@ class HapticWandBeacon: HapticBeacon {
         }
     }
     
-    private func playBeaconAudio () {
+    /// An internal function to play the beacon audio.
+    private func playBeaconAudio() {
         guard let sound = BeaconSound(PreviewWandAsset.self, at: beaconLocation, isLocalized: false) else {
             return
         }
@@ -87,6 +95,7 @@ class HapticWandBeacon: HapticBeacon {
         beacon = AppContext.shared.audioEngine.play(sound, heading: AppContext.shared.geolocationManager.heading(orderedBy: [.device]))
     }
     
+    /// An internal function to stop the beacon audio.
     private func stopBeaconAudio() {
         guard let id = beacon else {
             return
