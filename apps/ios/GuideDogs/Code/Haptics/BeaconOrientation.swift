@@ -24,6 +24,8 @@ class BeaconOrientation: Orientable {
     private var locationCancellable: AnyCancellable?
     
     /// Set up the location observer, and begin calculating the `bearing` of the user.
+    ///
+    /// - Parameter beacon: The location of the beacon to find the user's `bearing` to.
     init?(_ beacon: CLLocation) {
         guard let loc = AppContext.shared.geolocationManager.location else {
             return nil
