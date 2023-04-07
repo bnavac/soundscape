@@ -1,4 +1,3 @@
-%% ------
 flowchart TD
 %%App context
     a[AppContext] --> b[EstimatedLocationDetail]
