@@ -1,10 +1,19 @@
-erDiagram
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : has
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER ||--o{ INVOICE : "liable for"
-    DELIVERY-ADDRESS ||--o{ ORDER : receives
-    INVOICE ||--|{ ORDER : covers
-    ORDER ||--|{ ORDER-ITEM : includes
-    PRODUCT-CATEGORY ||--|{ PRODUCT : contains
-    PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+flowchart TD
+%%App context
+    a[AppContext] --> b[EstimatedLocationDetail]
+    b <--> c[SpatialDataCache]
+    b --> d[SpatialDataContext]
+    b --> f[SpatialDataManager]
 
+%%OSM
+
+g[OSMServiceManager]
+h[OSMServiceProtocol]
+i{ServiceModel}
+j[DebuggingSettingsContext]
+k[Realm Database]
+l[Kubernetes Pods]
+i --> g
+h -->g
+j --> i
+l <--> i
