@@ -1,0 +1,74 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXFileReference section */
+		A7F330F429E0B85F0091213B /* Diagram.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Diagram.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		A7F330ED29E0B8270091213B = {
+			isa = PBXGroup;
+			children = (
+				A7F330F429E0B85F0091213B /* Diagram.js */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		A7F330EE29E0B8270091213B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+			};
+			buildConfigurationList = A7F330F129E0B8270091213B /* Build configuration list for PBXProject "Diagraming" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A7F330ED29E0B8270091213B;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		A7F330F229E0B8270091213B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		A7F330F329E0B8270091213B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7F330F129E0B8270091213B /* Build configuration list for PBXProject "Diagraming" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F330F229E0B8270091213B /* Debug */,
+				A7F330F329E0B8270091213B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7F330EE29E0B8270091213B /* Project object */;
+}
