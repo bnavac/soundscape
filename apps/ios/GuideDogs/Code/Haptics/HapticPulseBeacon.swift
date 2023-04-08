@@ -10,40 +10,52 @@ import CoreLocation
 import Combine
 
 class HapticPulseBeacon: HapticBeacon {
-    /// Haptic engine for rendering haptics for the physical UI at decision points
+    /// Responsible for rendering haptics for the physical UI at decision points.
     private let engine = HapticEngine()
     
-    /// Wand for tracking when the user is pointing their phone at the beacon's
-    /// location so that corresponding haptics can be triggered appropriately
+    /// Used to track when the user is pointing their phone at the beacon's location so that corresponding haptics can be triggered appropriately.
     private let wand = PreviewWand()
     
-    /// Angular window over which the wand audio plays surrounding the bearing to the beacon
+    /// Defines the angular window over which the wand audio plays surrounding the bearing to the beacon.
     private let audioWindow = 60.0
     
-    /// ID for the beacon that plays ambient audio when the wand isn't pointed at a road
+    /// Represents the ID for the beacon that plays ambient audio when the wand isn't pointed at a road.
     private(set) var beacon: AudioPlayerIdentifier?
     
+    /// Represents the location of the beacon.
     private var beaconLocation: CLLocation
     
+    /// Idicates whether the wand is currently focused on the beacon.
     private var isBeaconFocussed = false
     
+    /// Represents the heading of the device.
     private var timerHeading: Heading?
+    /// Used to cancel the timer.
     private var timerToken: AnyCancellable?
     
+    /// Indicates whether the phone is flat or not.
     private var phoneIsFlat: Bool = false
+    /// Used to cancel the device orientation token.
     private var deviceOrientationToken: AnyCancellable?
     
+    /// Indicates whether to include haptic feedback or not.
     private let includeAHaptics = false
     
+    /// Returns a representation of the HapticPulseBeacon class.
     static var description: String {
         return String(describing: self)
     }
     
+    /// Initializes a new `HapticPulseBeacon` object with the specified location.
+    /// - Parameter at: The CLLocation object that represents the location of the beacon.
     required init(at: CLLocation) {
         beaconLocation = at
         wand.delegate = self
     }
     
+    /// Deinitializes the `HapticPulseBeacon` instance.
+    ///
+    /// Ccancels any ongoing tasks related to it, such as the timer token for heading updates and the device orientation token for monitoring the phone's orientation. Also stops any audio playback by stopping the audio engine's player associated with the beacon, if it exists.
     deinit {
         timerHeading = nil
         
@@ -54,6 +66,9 @@ class HapticPulseBeacon: HapticBeacon {
         deviceOrientationToken = nil
     }
     
+    /// Starts the beacon's haptics.
+    ///
+    /// If the phone is flat, and the user is pointing towards the beacon, every half second the beacon will send a haptic pulse to the user.
     func start() {
         guard let orientation = BeaconOrientation(beaconLocation) else {
             return
@@ -77,6 +92,7 @@ class HapticPulseBeacon: HapticBeacon {
         wand.start(with: [target], heading: heading)
     }
     
+    /// Stops the beacon's haptics.
     func stop() {
         // Stop feedback from the wand
         wand.stop()
@@ -94,6 +110,7 @@ class HapticPulseBeacon: HapticBeacon {
         }
     }
     
+    /// If the user's phone becomes flat, send an audio queue to the user.
     private func playBeaconAudio () {
         guard let sound = BeaconSound(PreviewWandAsset.self, at: beaconLocation, isLocalized: false) else {
             return
@@ -102,6 +119,7 @@ class HapticPulseBeacon: HapticBeacon {
         beacon = AppContext.shared.audioEngine.play(sound, heading: AppContext.shared.geolocationManager.heading(orderedBy: [.device]))
     }
     
+    /// If the user's phone is no only flat, stop the audio.
     private func stopBeaconAudio() {
         guard let id = beacon else {
             return
