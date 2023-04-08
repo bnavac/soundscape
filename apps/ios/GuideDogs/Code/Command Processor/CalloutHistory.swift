@@ -19,7 +19,11 @@ protocol CalloutHistoryDelegate: AnyObject {
     func onHistoryCleared()
 }
 
-/// A class that keeps track of a history of Callouts and notifies a delegate of any changes to the history.
+
+/// The CalloutHistory class is responsible for keeping track of a history of callouts.
+///
+/// The CalloutHistory class is implemented using a BoundedStack data structure to ensure
+/// that the number of callouts in the history is bounded to a maximum value.
 class CalloutHistory {
     
     /// The delegate that receives notifications when the history is modified.
