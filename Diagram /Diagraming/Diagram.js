@@ -1,4 +1,6 @@
+-%% ------
 flowchart TD
+
 %%App context
     a[AppContext] --> b[EstimatedLocationDetail]
     b <--> c[SpatialDataCache]
@@ -24,7 +26,7 @@ flowchart TD
     end
 l --> p
 
-%% ------ 
+%% ------
 
     A[Route Parameters] -->|has| B(RouteWayPoint Parameters)
     B --> C(Marker Parameters)
@@ -34,3 +36,9 @@ l --> p
     E--> F(Latitude/Longitude)
 
 
+flowchart TD
+    %%View life cycle
+    Appearing --- |viewDidAppear|Appeared  --- |viewWillDisappear|Disappearing
+    Disappearing --> |viewWillAppear|Appearing
+    Appearing --> |viewWillDisappear|Disappearing
+    Appearing ---|viewWillAppear| Disappeared  ---|viewDidDisappear| Disappearing
