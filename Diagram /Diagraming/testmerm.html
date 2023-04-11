@@ -41,11 +41,74 @@
 
     And here is another:
     <pre class="mermaid">
-            graph TD
-            A[Client] -->|tcp_123| B
-            B(Load Balancer)
-            B -->|tcp_456| C[Server1]
-            B -->|tcp_456| D[Server2]
+        classDiagram
+            WaypointDetail<|-- LocationDetail
+            MKMapViewDelegate <|-- WaypointDetail
+            MKMapViewDelegate <|-- RouteDetail
+            MKMapViewDelegate <|-- TourDetail
+            RouteDetail <|-- LocationDetail
+            TourDetail <|-- LocationDetail
+
+           
+            
+            class MKMapViewDelegate{
+                +mapView()
+            }
+
+            class RouteDetail{
+                +String id
+                +String name
+                +String Description
+                +LocationDetail waypoints
+                +guidance()
+                +setRouteProperties()
+            }
+
+            class TourDetail{
+                
+                +String name
+                +String Description
+                +LocationDetail waypoints
+                +LocationDetail pois
+                +Listeners
+                +guidance()
+                +setRouteProperties()
+            }
+
+            class LocationDetail{
+                + CLLocation
+                + Address
+                + Annotation
+
+
+                +displayAddress()
+                +displayAnnotation()
+
+            }
+            class WaypointDetail{
+              +isActive()
+              +String DisplayName
+            }
+
+    </pre>
+    
+    <pre class="mermaid">
+        flowchart TD
+            %%View life cycle
+            Appearing --- |viewDidAppear|Appeared  --- |viewWillDisappear|Disappearing
+            Disappearing --> |viewWillAppear|Appearing
+            Appearing --> |viewWillDisappear|Disappearing
+            Appearing ---|viewWillAppear| Disappeared  ---|viewDidDisappear| Disappearing
+    </pre>
+    
+    <pre class="mermaid">
+    flowchart TD
+    A[Route Parameters] -->|has| B(RouteWayPoint Parameters)
+    B --> C(Marker Parameters)
+    C --> D(Location Parameters)
+    D --> E(Coordinate Paramters)
+    D --> E2(Entity Parameters)
+    E--> F(Latitude/Longitude)
     </pre>
 
     <script type="module">
