@@ -1,42 +1,64 @@
 <html>
   <body>
-    Test:
+    Soundscape Diagram
     <pre class="mermaid">
-            flowchart TD
-            %%App context
-            a[AppContext] --> b[EstimatedLocationDetail]
-            b <--> c[SpatialDataCache]
-            b --> d[SpatialDataContext]
-            b --> f[SpatialDataManager]
-            %%OSM
-            g[OSMServiceManager]
-            h[OSMServiceProtocol]
-            i{ServiceModel}
-            j[DebuggingSettingsContext]
-            k[Realm Database]
-            l[Kubernetes Pods]
-            p[The PostGIS Database]
-            v[Linux Machine]
-            i --> g
-            h -->g
-            j --> i
-            l <--> i
-            subgraph .
-            p --> v
-            end
-            l --> p
-            %%Visual UI
-            a1[MapStyle / different cases]
-            b1[MapViewController/UIViewController]
-            a1 --> |Style Property| b1
-            c1 --> b1
-            d1 --> b1
-            subgraph Map is editable and expandible
-            c1[Editable]
-            d1[Expandable]
-            end
-            
-            
+        flowchart TD
+                   
+                    %%App context
+                    a[AppContext] --> b[EstimatedLocationDetail]
+                    b <--> c[SpatialDataCache]
+                    b --> d[SpatialDataContext]
+                    b --> f[SpatialDataManager]
+                    
+                    %%OSM
+                    g[OSMServiceManager]
+                    h[OSMServiceProtocol]
+                    i{ServiceModel}
+                    j[DebuggingSettingsContext]
+                    k[Realm Database]
+                    l[Kubernetes Pods]
+                    p[The PostGIS Database]
+                    v[Linux Machine]
+                    i --> g
+                    h -->g
+                    j --> i
+                    l <--> i
+                    subgraph .
+                    p --> v
+                    end
+                    l --> p
+                    
+                    %%Visual UI
+                    a1[MapStyle / different cases]
+                    b1[MapViewController/UIViewController]
+                    a1 --> |Style Property| b1
+                    c1 --> b1
+                    d1 --> b1
+                    subgraph Map is editable and expandible
+                    c1[Editable]
+                    d1[Expandable]
+                    end
+                    
+                    %% Testing sebastiens ---------------------
+                    A[Route Parameters] -->|has| B(RouteWayPoint Parameters)
+                    B --> C(Marker Parameters)
+                    C --> D(Location Parameters)
+                    D --> E(Coordinate Paramters)
+                    D --> E2(Entity Parameters)
+                    E--> F(Latitude/Longitude)
+                    
+                    %% Testing Sebastines 2 --------------------
+                   
+                   %%View life cycle
+                   subgraph f1 [View of Life Cycle]
+                    Appearing --- |viewDidAppear|Appeared  --- |viewWillDisappear|Disappearing
+                    Disappearing --> |viewWillAppear|Appearing
+                    Appearing --> |viewWillDisappear|Disappearing
+                    Appearing ---|viewWillAppear| Disappeared  ---|viewDidDisappear| Disappearing
+                    end
+                    f1 --> b1
+                
+
     </pre>
 
     And here is another:
@@ -90,25 +112,6 @@
               +String DisplayName
             }
 
-    </pre>
-    
-    <pre class="mermaid">
-        flowchart TD
-            %%View life cycle
-            Appearing --- |viewDidAppear|Appeared  --- |viewWillDisappear|Disappearing
-            Disappearing --> |viewWillAppear|Appearing
-            Appearing --> |viewWillDisappear|Disappearing
-            Appearing ---|viewWillAppear| Disappeared  ---|viewDidDisappear| Disappearing
-    </pre>
-    
-    <pre class="mermaid">
-    flowchart TD
-    A[Route Parameters] -->|has| B(RouteWayPoint Parameters)
-    B --> C(Marker Parameters)
-    C --> D(Location Parameters)
-    D --> E(Coordinate Paramters)
-    D --> E2(Entity Parameters)
-    E--> F(Latitude/Longitude)
     </pre>
 
     <script type="module">
