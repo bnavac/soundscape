@@ -22,7 +22,19 @@ flowchart TD
     subgraph .
     p --> v
     end
-l --> p
+    l --> p
+
+%%Visual UI
+    a1[MapStyle / different cases]
+    b1[MapViewController/UIViewController]
+
+    a1 --> |Style Property| b1
+    c1 --> b1
+    d1 --> b1
+    subgraph Map is editable and expandible
+    c1[Editable]
+    d1[Expandable]
+    end
 
 %% ------ 
 
