@@ -8,12 +8,16 @@
 
 /* Begin PBXFileReference section */
 		A7F330F429E0B85F0091213B /* Diagram.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Diagram.js; sourceTree = "<group>"; };
+		F6F1639029E5FF6900283046 /* web.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = web.html; sourceTree = "<group>"; };
+		F6F1639129E6016400283046 /* testmerm.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = testmerm.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		A7F330ED29E0B8270091213B = {
 			isa = PBXGroup;
 			children = (
+				F6F1639129E6016400283046 /* testmerm.html */,
+				F6F1639029E5FF6900283046 /* web.html */,
 				A7F330F429E0B85F0091213B /* Diagram.js */,
 			);
 			sourceTree = "<group>";
