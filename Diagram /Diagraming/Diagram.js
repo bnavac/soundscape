@@ -42,3 +42,54 @@ flowchart TD
     Disappearing --> |viewWillAppear|Appearing
     Appearing --> |viewWillDisappear|Disappearing
     Appearing ---|viewWillAppear| Disappeared  ---|viewDidDisappear| Disappearing
+
+
+%%MapView Delegate
+classDiagram
+    WaypointDetail<|-- LocationDetail
+    MKMapViewDelegate <|-- WaypointDetail
+    MKMapViewDelegate <|-- RouteDetail
+    MKMapViewDelegate <|-- TourDetail
+    RouteDetail <|-- LocationDetail
+    TourDetail <|-- LocationDetail
+
+   
+    
+    class MKMapViewDelegate{
+        +mapView()
+    }
+
+    class RouteDetail{
+        +String id
+        +String name
+        +String Description
+        +LocationDetail waypoints
+        +guidance()
+        +setRouteProperties()
+    }
+
+    class TourDetail{
+        
+        +String name
+        +String Description
+        +LocationDetail waypoints
+        +LocationDetail pois
+        +Listeners
+        +guidance()
+        +setRouteProperties()
+    }
+
+    class LocationDetail{
+        + CLLocation
+        + Address
+        + Annotation
+
+
+        +displayAddress()
+        +displayAnnotation()
+
+    }
+    class WaypointDetail{
+      +isActive()
+      +String DisplayName
+    }
