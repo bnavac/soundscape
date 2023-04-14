@@ -64,6 +64,7 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
 
     private weak var deviceContext: UIDeviceManager!
     private let serviceModel: OSMServiceModelProtocol
+    //^ Focus on the above Line -  Sheldon
     
     let destinationManager: DestinationManagerProtocol
     
