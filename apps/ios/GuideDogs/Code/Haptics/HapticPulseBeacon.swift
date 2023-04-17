@@ -128,6 +128,12 @@ class HapticPulseBeacon: HapticBeacon {
         AppContext.shared.audioEngine.stop(id)
     }
     
+    /// The function that gets called when the wand starts focusing on a target.
+    ///
+    /// In this function, the ambient audio for the road finder is set up, based on the user's heading and the location of the beacon. The volume of the audio is calculated based on the distance between the user's current heading and the target location, and is set to 1.0 if the distance is within a certain threshold, and 0.0 otherwise.
+    ///
+    /// - Parameters:
+    ///   - wand: The Wand object that started focusing on a target.
     func wandDidStart(_ wand: Wand) {
         // Set up the ambient audio for the road finder
         let silentDistance = 15.0
@@ -157,6 +163,11 @@ class HapticPulseBeacon: HapticBeacon {
         }
     }
     
+    /// Notifies the delegate when the specified wand crosses the threshold of the specified orientable target.
+    ///
+    /// - Parameters:
+    ///   - wand: The wand that crossed the threshold.
+    ///   - target: The orientable target that the wand crossed.
     func wand(_ wand: Wand, didCrossThreshold target: Orientable) {
         guard phoneIsFlat else {
             return
@@ -167,6 +178,14 @@ class HapticPulseBeacon: HapticBeacon {
         engine.prepare(for: .error)
     }
     
+    /// Notifies the delegate that the specified wand has gained focus on the given target.
+    ///
+    /// This method is called by the wand object when it gains focus on a new target. The delegate can use this method to perform any necessary setup or configuration for the target. If the `isInitial` parameter is true, this indicates that this is the first time the target has gained focus, so the delegate may need to perform additional initialization.
+    ///
+    /// - Parameters:
+    ///    - wand: The wand that gained focus.
+    ///    - target: The Orientable object that the wand has gained focus on.
+    ///    - isInitial: A Boolean value indicating whether this is the initial focus event for the target.
     func wand(_ wand: Wand, didGainFocus target: Orientable, isInitial: Bool) {
         isBeaconFocussed = true
         
@@ -212,6 +231,14 @@ class HapticPulseBeacon: HapticBeacon {
         // No-op currently
     }
     
+
+    /// Informs the delegate that the specified wand has lost focus on the given orientable target.
+    ///
+    /// Call this method on the delegate object when the specified wand loses focus on the given orientable target. The delegate can use this information to update its state or take other actions as needed.
+    /// This method is called by the wand when it loses focus on the target. You should not call this method directly.
+    /// - Parameters:
+    ///    - wand: The wand that has lost focus.
+    ///    - target: The orientable object that the wand was focused on.
     func wand(_ wand: Wand, didLoseFocus target: Orientable) {
         isBeaconFocussed = false
         
