@@ -8,25 +8,38 @@
 
 import Foundation
 
+
+/// The `HTTPStatusCode` enumeration defines the HTTP status codes used by the service model.
 enum HTTPStatusCode: Int {
     case unknown = 0
     case success = 200
     case notModified = 304
 }
 
+
+/// The `HTTPHeader` enumeration defines the HTTP headers used by the service model.
 enum HTTPHeader: String {
     case ifNoneMatch = "If-None-Match"
     case eTag = "Etag"
 }
 
+/// The `ServiceError` enumeration defines the errors that may be thrown by the service model.
 enum ServiceError: Error {
     case jsonParseFailed
 }
 
+/// The `OSMServiceModel` class provides methods for retrieving data from a tile server and a dynamic data source.
 class OSMServiceModel: OSMServiceModelProtocol {
     /// Path to the tile server
     private static let path = "/tiles"
+
     
+    /// Returns tile data for the given `tile` object and `categories` object asynchronously.
+    /// - Parameters:
+    ///    - tile: The `VectorTile` object for which to retrieve data.
+    ///    - categories: The `SuperCategories` object containing the categories for which to retrieve data.
+    ///    - queue: The `DispatchQueue` object on which to execute the `callback` function.
+    ///    - callback: The function to call when the data is retrieved. The function takes three parameters: the HTTP status code of the response, the retrieved `TileData` object, and any error that occurred during retrieval.
     func getTileDataWithQueue(tile: VectorTile, categories: SuperCategories, queue: DispatchQueue, callback: @escaping OSMServiceModelProtocol.TileDataLookupCallback) {
         let url = URL(string: "\(ServiceModel.servicesHostName)/\(tile.zoom)/\(tile.x)/\(tile.y)")!
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ServiceModel.requestTimeout)
@@ -70,6 +83,10 @@ class OSMServiceModel: OSMServiceModelProtocol {
         task.resume()
     }
     
+    /// Returns dynamic data for the given URL asynchronously.
+    /// - Parameters:
+    ///   - dynamicURL: The URL from which to retrieve the dynamic data.
+    ///   - callback: The function to call when the data is retrieved. The function takes three parameters: the HTTP status code of the response, the retrieved data as a `String`, and any error that occurred during retrieval.
     func getDynamicData(dynamicURL: String, callback: @escaping OSMServiceModelProtocol.DynamicDataLookupCallback) {
         guard !dynamicURL.isEmpty else {
             callback(.unknown, nil, NSError(domain: ServiceModel.errorDomain, code: 0, userInfo: nil))
