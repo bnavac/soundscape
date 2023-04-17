@@ -34,6 +34,7 @@ class OSMServiceModel: OSMServiceModelProtocol {
     ///    -queue: A dispatch queue is a queue that allows for concurrency
     ///    -callback: Makes a call to a server which gets a status code
     func getTileDataWithQueue(tile: VectorTile, categories: SuperCategories, queue: DispatchQueue, callback: @escaping OSMServiceModelProtocol.TileDataLookupCallback) {
+        //Note that the original file path was: ServiceModel.servicesHostName/tiles/tiles.zoom/tile.x/tile.y.json. However the new database we use does not have this exact file path.
         let url = URL(string: "\(ServiceModel.servicesHostName)/\(tile.zoom)/\(tile.x)/\(tile.y)")!
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ServiceModel.requestTimeout)
         

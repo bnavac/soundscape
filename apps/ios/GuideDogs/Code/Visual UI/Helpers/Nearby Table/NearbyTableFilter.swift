@@ -48,13 +48,17 @@ struct NearbyTableFilter: Equatable {
     
     init(type: PrimaryType?) {
         self.type = type
-        
+        print(type)
         if let type = type {
             switch type {
             case .transit:
                 self.localizedString = GDLocalizedString("filter.transit")
                 self.image = UIImage(named: "Transit")
+            case .test:
+                self.localizedString = GDLocalizedString("filter.test")
+                self.image = UIImage(named: "Globe")
             }
+            
         } else {
             // There is no `PrimaryType` filter selected
             self.localizedString = GDLocalizedString("filter.all")

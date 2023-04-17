@@ -23,7 +23,7 @@ struct EstimatedLocationDetail {
         self.name = name
         self.address = address
     }
-    //This runs when the user tries to see their current location (presses the current location button).
+    //This runs when the user tries to see their current location (presses the current location button). As well as when a user taps any POI.
     static func make(for value: LocationDetail, completion: @escaping (EstimatedLocationDetail) -> Void) {
         // Search for an OSM polygon containing the given location
         // using entities that are closest to the given location

@@ -13,6 +13,7 @@ extension GDASpatialDataResultEntity: Typeable {
     func isOfType(_ type: PrimaryType) -> Bool {
         switch type {
         case .transit: return isOfType(.transitStop)
+        case .test: return false
         }
     }
     

@@ -139,3 +139,4 @@ __pycache__/
 # Security excludes
 # =========================
 private_keys/
+*.xcscheme

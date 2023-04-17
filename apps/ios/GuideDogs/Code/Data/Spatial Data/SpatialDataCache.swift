@@ -144,7 +144,8 @@ class SpatialDataCache: NSObject {
             return database.object(ofType: Route.self, forPrimaryKey: key)
         }
     }
-    //Runs when the user clicks "places nearby".
+    //Runs whenever a user clicks on markers and routes, and current location, as well as when they click the back button on those those two as well as places nearby.
+    
     static func routes(withPredicate predicate: NSPredicate? = nil) -> [Route] {
         return autoreleasepool {
             guard let database = try? RealmHelper.getDatabaseRealm() else {

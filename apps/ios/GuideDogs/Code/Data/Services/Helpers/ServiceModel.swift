@@ -32,8 +32,8 @@ class ServiceModel {
     static let errorDomain = "GDAHTTPErrorDomain"
     /// String for identifying errors that originate from Realm
     static let errorRealm = "GDAHTTPErrorRealm"
-    
-    private static let productionServicesHostName = "http://34.244.7.196"
+    private static let servicesName = ProcessInfo.processInfo.environment["OSM_DATABASE"]
+    private static let productionServicesHostName = servicesName
     private static let productionAssestsHostName = "https://yourstaticblobstore"
     // Do not change `productionVoicesHostName`!
     private static let productionVoicesHostName = "https://yourstaticblobstore"
@@ -47,7 +47,7 @@ class ServiceModel {
             return debugHostName
         }
         
-        return productionServicesHostName
+        return productionServicesHostName!
     }
     
     static var assetsHostName: String {
