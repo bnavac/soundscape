@@ -63,11 +63,19 @@ wq (then hit return)
 
 Should look something like this
 [![s7]][s7-url]
+[![JQuery]][JQuery-url]
+[![idk]][s7-url]
 ## Step 8 Ensure you have the right Ruby
 ## Step 9 Get the rest of the dependancies
 ## Step 10 Open Project
 ## Step 11 Correct Setting
 ## Step 12 Run
 
-[s7]: C:\Users\night\Downloads\test.png
+[s7]: C:\Users\night\Downloads\s7.png
 [s7-url]: https://google.com
+
+
+[JQuery]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
+
+[idk]: soundscape\docs\images\s7.png
