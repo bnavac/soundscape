@@ -49,9 +49,25 @@ if not installed
 ## Step 5 Create a Dev Folder
 `mkdir ~/Developer`
 ## Step 6 Get the Git Repository
+While in cd Developer
+`git clone https://github.com/bnavac/soundscape.git`
 ## Step 7 Change your bash profile
+Run these in order:
+`Cd`
+`ls -a`
+`vim .bashrc`
+(press i on keyboard then hit return)
+`Paste : eval "$(rbenv init - bash)"`
+Hit esc, then shift colon
+wq (then hit return)
+
+Should look something like this
+[![s7]][s7-url]
 ## Step 8 Ensure you have the right Ruby
 ## Step 9 Get the rest of the dependancies
 ## Step 10 Open Project
 ## Step 11 Correct Setting
 ## Step 12 Run
+
+[s7]: C:\Users\night\Downloads\test.png
+[s7-url]: https://google.com
