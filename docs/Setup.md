@@ -1,6 +1,8 @@
+
 # Welcome to Soundscape!
 
 Welcome to the Soundscape setup!
+![SmallLogo]
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -21,7 +23,9 @@ Welcome to the Soundscape setup!
   </ol>
 </details>
 
+
 ## Step 1 Have XCode
+An unfortunate requirement to code in Swift (the main language of SoundScape) is that it requires XCode, which requires a Mac.
 ## Step 2 Get Homebrew
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
@@ -62,20 +66,48 @@ Hit esc, then shift colon
 wq (then hit return)
 
 Should look something like this
-[![s7]][s7-url]
-[![JQuery]][JQuery-url]
-[![idk]][s7-url]
+![step_7]
 ## Step 8 Ensure you have the right Ruby
-## Step 9 Get the rest of the dependancies
+Run:
+`rbenv install 3.2.0`
+`rbenv global 3.2.0`
+Check that it is in the right directory, if you run:
+`Which ruby`
+Should be under rbenv
+## Step 9 Get the rest of the dependencies
+Then go into soundscape ios directory:
+`Cd Developer/soundscape/apps/ios`
+Get Bundle and Cocoapods patch
+
+Run:
+`bundle install`
+`gem install cocoapods-patch`
+`Pod install`
+
+If you run into errors on this step, say your prayers and check which directories your ruby is under and what version it is, run sudo if you don’t have write permission
+`Which ruby`
+  
+Ruby --version
+Should look something like:
+![step_9]
 ## Step 10 Open Project
-## Step 11 Correct Setting
-## Step 12 Run
+  Cd Developer/soundscape/apps/ios`
+open GuideDogs.xcworkspace
+## Step 11 Correct Settings
+Once xcode is open, click on guidedogs, in the targets tab click Soundscape, go to signing and capabilities
 
-[s7]: C:\Users\night\Downloads\s7.png
-[s7-url]: https://google.com
+Turn on Automatically manage signing
 
+For team choose (Personal Team)
 
-[JQuery]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+Set the bundle identifier to soundscape.(yourname).io
+## Step 12 Done!
+You now should be able to run SoundScape on a virtual iPhone 14 in XCode!
 
-[idk]: soundscape\docs\images\s7.png
+![Logo]
+
+[step_7]:images\s7.png
+[step_9]:images\s9.png
+[Logo]:images\SoundScape.png
+[SmallLogo]:images\SoundScapeSmall.png
+
