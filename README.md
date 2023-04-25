@@ -34,3 +34,33 @@ Trademarks This project may contain trademarks or logos for projects, products, 
 
 # Current Documentation
 https://miro.com/app/board/uXjVPj0zipE=/?track=true&utm_source=notification&utm_medium=email&utm_campaign=weekly-digest&utm_content=activity-top
+
+# Onboarding
+
+Step 1:
+ - Get XCode
+
+Step 2:
+- Get rbenv (often through homebrew)
+
+Step 3:
+- Check for RVM (if not then download it through: https://github.com/rvm/rvm)
+
+Step 4:
+- Get CocoaPods (brew install cocoapods)
+
+Step 5:
+- Clone the Git Repository 
+
+Step 6: 
+- Change bash profile to make rbenv the main ruby 
+
+Step 7:
+- Get cocoa pods patch and bundle 
+    bundle install
+    gem install cocoapods-patch
+    Pod install 
+    
+Step 8: 
+- Open Soundscape~!
+
