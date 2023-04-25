@@ -121,7 +121,7 @@ extension SearchResultsUpdater: UISearchResultsUpdating {
         //
         //Note that we use the same code here and also in searchWithText
         //There are a few limitations with this design, namely that it will only get POIS in the nearby area. So if the user wants to go anywhere that is not within (500?) (feet?meters?) of them, they are out of luck.
-        //Second, the code grabs a new set of POIs each time and does a linear search through each.
+        //Second, the code grabs a new set of POIs each time and does a linear search through each. This is really inefficent, but given the small amount of POIs we have, fixing the first issue is more pressing.
         if(searchText == ""){
             return
         }

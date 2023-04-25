@@ -45,7 +45,8 @@ struct NearbyTableFilter: Equatable {
     let image: UIImage?
     
     // MARK: Initialization
-    
+    //Add additional types here to add buttons to places nearby (and maybe other places).
+    //You will also need to add an image and localisation text for your filter
     init(type: PrimaryType?) {
         self.type = type
         if let type = type {

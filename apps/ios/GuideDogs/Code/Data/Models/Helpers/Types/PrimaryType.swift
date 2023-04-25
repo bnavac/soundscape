@@ -7,9 +7,9 @@
 //
 
 import Foundation
-
+//Enum that defines a type for a POI ie Transit, Food, Healthcare, etc.
 enum PrimaryType: String, CaseIterable, Type {
-    //Add cases here
+    //Add cases here to add new types for places nearby
     case transit
     case test
     func matches(poi: POI) -> Bool {

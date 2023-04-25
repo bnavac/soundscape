@@ -34,9 +34,12 @@ class ServiceModel {
     static let errorRealm = "GDAHTTPErrorRealm"
     private static let servicesName = ProcessInfo.processInfo.environment["OSM_DATABASE"]
     private static let productionServicesHostName = servicesName
-    private static let productionAssestsHostName = "https://yourstaticblobstore"
+    //Change this to the blob website will redirect the Soundscape blog button to the website
+    //We will also need to put the assets and voices on the blog (I think?).
+    private static let staticStore = "https://google.com"
+    private static let productionAssestsHostName = staticStore
     // Do not change `productionVoicesHostName`!
-    private static let productionVoicesHostName = "https://yourstaticblobstore"
+    private static let productionVoicesHostName = staticStore
     
     static var learningResourcesWebpage: URL {
         return URL(string: productionAssestsHostName + "/externalcontent/soundscape_learning_resources.html")!

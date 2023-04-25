@@ -16,13 +16,16 @@ extension GDASpatialDataResultEntity: Typeable {
         case .test: return false
         }
     }
-    //It is unknown what this does yet
+    //Returns true if the secondary type is a type in the enum (Which should always be true)
+    //Assuming that you add additional cases to this method
+    //Though if you do add more cases, then the method will always return true and so this method is basically useless (So why is it here?)
     func isOfType(_ type: SecondaryType) -> Bool {
         switch type {
         case .transitStop: return isTransitStop()
+        default: return false
         }
     }
-    //Why have this has its own function
+    //Why is this its own function?
     private func isTransitStop() -> Bool {
         guard let category = SuperCategory(rawValue: superCategory) else {
             return false

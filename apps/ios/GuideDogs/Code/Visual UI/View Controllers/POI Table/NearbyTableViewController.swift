@@ -27,7 +27,6 @@ class NearbyTableViewController: BaseTableViewController, POITableViewController
     private var data: NearbyData?
     private var subscriber: AnyCancellable?
     var onDismissPreviewHandler: (() -> Void)?
-    
     var telemetryContext: String {
         if let usageLog = delegate?.usageLog, usageLog.isEmpty == false {
             return "\(usageLog).nearby_places"
@@ -114,7 +113,7 @@ class NearbyTableViewController: BaseTableViewController, POITableViewController
         // Set the DZNEmptyDataSet connections
         self.tableView.emptyDataSetSource = self
     }
-    
+    //Loads the view with an animation
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
