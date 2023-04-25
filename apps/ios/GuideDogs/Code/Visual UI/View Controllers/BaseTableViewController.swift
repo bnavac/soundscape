@@ -16,7 +16,7 @@ class BaseTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem.defaultBackBarButtonItem
-        //The background color for the buttons in places nearby, ie if one clicks on all places, then the background color is black and the secondary color is blue. This does not appear to be used anywhere else.
+        //The background color for the buttons in places nearby, ie if one clicks on all places, then the background color is black and the secondary color is blue. This does not appear to have an effect on anything else, which is weird because it is used 10 times in other classes.
         self.tableView.backgroundColor = Colors.Background.quaternary
         self.tableView.separatorColor = Colors.Background.secondary
     }

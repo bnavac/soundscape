@@ -11,7 +11,8 @@ import Foundation
 enum PrimaryType: String, CaseIterable, Type {
     //Add cases here to add new types for places nearby
     case transit
-    case test
+    case food
+    case landmarks
     func matches(poi: POI) -> Bool {
         guard let typeable = poi as? Typeable else {
             return false

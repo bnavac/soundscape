@@ -15,14 +15,16 @@ struct NearbyTableFilter: Equatable {
     static var defaultFilter: NearbyTableFilter {
         return NearbyTableFilter(type: nil)
     }
-    
+    //Add filters here to add buttons to places nearby
     static var defaultFilters: [NearbyTableFilter] {
         return [
             .defaultFilter,
-            NearbyTableFilter(type: .transit)
+            NearbyTableFilter(type: .transit),
+            NearbyTableFilter(type: .food),
+            NearbyTableFilter(type: .landmarks)
         ]
     }
-    
+    ///An array of every filter that is in the primary type enum
     static var primaryTypeFilters: [NearbyTableFilter] {
         var filters: [NearbyTableFilter] = []
         
@@ -54,9 +56,12 @@ struct NearbyTableFilter: Equatable {
             case .transit:
                 self.localizedString = GDLocalizedString("filter.transit")
                 self.image = UIImage(named: "Transit")
-            case .test:
-                self.localizedString = GDLocalizedString("filter.test")
-                self.image = UIImage(named: "Globe")
+            case .food:
+                self.localizedString = GDLocalizedString("filter.food")
+                self.image = UIImage(named: "Circle")
+            case .landmarks:
+                self.localizedString = GDLocalizedString("filter.landmarks")
+                self.image = UIImage(named: "Flag")
             }
             
         } else {

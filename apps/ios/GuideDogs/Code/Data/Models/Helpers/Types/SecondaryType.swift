@@ -11,7 +11,7 @@ import Foundation
 enum SecondaryType: Type {
     
     case transitStop
-    
+    case steps
     func matches(poi: POI) -> Bool {
         guard let typeable = poi as? Typeable else {
             return false

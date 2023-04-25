@@ -11,7 +11,7 @@ import DZNEmptyDataSet
 import CoreLocation
 import Combine
 import SwiftUI
-
+//This appears to be the view controller for the Places Nearby button
 class NearbyTableViewController: BaseTableViewController, POITableViewController {
     
     // MARK: Properties
@@ -76,7 +76,7 @@ class NearbyTableViewController: BaseTableViewController, POITableViewController
             if filter == currentFilter {
                 title = GDLocalizedString("filter.selected", filter.localizedString)
             }
-            
+            ///Adds an action for the alert Controller, this appears to be mostly for tracking stuff that the user is doing, but the user does not see these alerts.
             alertController.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
                 GDATelemetry.track("nearby.filter.selected", with: ["filter": filter.type?.rawValue ?? "all", "context": self.delegate?.usageLog ?? ""])
                 
@@ -200,7 +200,6 @@ class NearbyTableViewController: BaseTableViewController, POITableViewController
 }
 
 extension NearbyTableViewController: TableViewSelectDelegate {
-    
     func didSelect(rowAtIndexPath indexPath: IndexPath) {
         GDATelemetry.track("poi_selected.nearby", with: ["filter": currentFilter.type?.rawValue ?? "all", "context": delegate?.usageLog ?? ""])
         

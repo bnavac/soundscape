@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import DZNEmptyDataSet
 import Combine
-
+//This appears to be related to NearbyTableViewController in that it helps construct the places nearby section
 class NearbyFilterTableViewController: UITableViewController, POITableViewController {
     
     // MARK: `IBOutlet`

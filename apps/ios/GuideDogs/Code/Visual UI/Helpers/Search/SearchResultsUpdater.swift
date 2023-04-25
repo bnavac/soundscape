@@ -130,7 +130,7 @@ extension SearchResultsUpdater: UISearchResultsUpdating {
         //Filter POIs by just finding a match through in names
         var pois: [POI] = []
         for poi in nearbyData.pois {
-            if(poi.name.contains(searchText)){
+            if(poi.name.lowercased().contains(searchText.lowercased())){
                 pois.append(poi)
             }
         }
@@ -183,7 +183,7 @@ extension SearchResultsUpdater: UISearchBarDelegate {
         //Filter POIs by just finding a match through in names
         var pois: [POI] = []
         for poi in nearbyData.pois {
-            if(poi.name.contains(searchText)){
+            if(poi.name.lowercased().contains(searchText.lowercased())){
                 pois.append(poi)
             }
         }

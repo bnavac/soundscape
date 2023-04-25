@@ -323,7 +323,7 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
         
         return getDataView(for: location, searchDistance: searchDistance)
     }
-    
+    ///Returns every POI within a certain radius
     func getCurrentDataView(initialSearchDistance: CLLocationDistance = SpatialDataContext.initialPOISearchDistance, shouldExpandDataView: (SpatialDataViewProtocol) -> Bool) -> SpatialDataViewProtocol? {
         // Fetch cached data
         var expansions = 0
@@ -332,7 +332,7 @@ class SpatialDataContext: NSObject, SpatialDataProtocol {
         
         // Load Nearby
         //
-        // Progressively expand search distance until 50 results are returned of
+        // Progressively expand search distance until 50 results are returned or
         // seach distance reaches `cacheDistance`.
         while range <= SpatialDataContext.cacheDistance {
             defer {
