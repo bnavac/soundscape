@@ -30,7 +30,6 @@ class SearchResultsUpdater: NSObject {
     }
     
     // MARK: Properties
-    
     weak var delegate: SearchResultsUpdaterDelegate?
     private var searchRequestToken: RequestToken?
     private var searchResultsUpdating = false
@@ -81,13 +80,13 @@ class SearchResultsUpdater: NSObject {
 }
 
 // MARK: - UISearchResultsUpdating
-
+//An extension that comes from the original UISearchController
 extension SearchResultsUpdater: UISearchResultsUpdating {
-    
+    //Note that this function runs every time the user types in text
     func updateSearchResults(for searchController: UISearchController) {
         searchBarButtonClicked = false
         
-        if let searchBarText = searchController.searchBar.text, searchBarText.isEmpty == false {
+        if let searchBarText = searchController.searchBar.text, !searchBarText.isEmpty {
             // Fetch new search results
             switch context {
             case .partialSearchText: partialSearchWithText(searchText: searchBarText)
@@ -120,6 +119,23 @@ extension SearchResultsUpdater: UISearchResultsUpdating {
         //
         // Fetch autosuggest results with new search text
         //
+        //Note that we use the same code here and also in searchWithText
+        //There are a few limitations with this design, namely that it will only get POIS in the nearby area. So if the user wants to go anywhere that is not within (500?) (feet?meters?) of them, they are out of luck.
+        //Second, the code grabs a new set of POIs each time and does a linear search through each.
+        if(searchText == ""){
+            return
+        }
+        //Grab each nearby POI
+        let nearbyData = NearbyDataContext(location: AppContext.shared.geolocationManager.location)
+        //Filter POIs by just finding a match through in names
+        var pois: [POI] = []
+        for poi in nearbyData.pois {
+            if(poi.name.contains(searchText)){
+                pois.append(poi)
+            }
+        }
+        //Return the result
+        delegate?.searchResultsDidUpdate(pois, searchLocation: AppContext.shared.geolocationManager.location)
     }
     
 }
@@ -127,7 +143,7 @@ extension SearchResultsUpdater: UISearchResultsUpdating {
 // MARK: - UISearchBarDelegate
 
 extension SearchResultsUpdater: UISearchBarDelegate {
-    
+    //Runs whenever the user presses enter on the search bar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBarButtonClicked = true
         
@@ -159,6 +175,20 @@ extension SearchResultsUpdater: UISearchBarDelegate {
         //
         // Fetch search results given search text
         //
+        if(searchText == ""){
+            return
+        }
+        //Grab each nearby POI
+        let nearbyData = NearbyDataContext(location: AppContext.shared.geolocationManager.location)
+        //Filter POIs by just finding a match through in names
+        var pois: [POI] = []
+        for poi in nearbyData.pois {
+            if(poi.name.contains(searchText)){
+                pois.append(poi)
+            }
+        }
+        //Return the result somehow
+        delegate?.searchResultsDidUpdate(pois, searchLocation: AppContext.shared.geolocationManager.location)
     }
     
 }

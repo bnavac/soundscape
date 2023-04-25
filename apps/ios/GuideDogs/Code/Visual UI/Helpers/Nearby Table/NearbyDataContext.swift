@@ -25,7 +25,7 @@ class NearbyDataContext {
     private(set) var location: CLLocation?
     private var initialNearbyRequestToken: RequestToken?
     private let queue = DispatchQueue(label: "com.company.appname.nearbytable")
-    private var pois: [POI] = []
+    public private(set) var pois: [POI] = []
     private(set) var data: CurrentValueSubject<NearbyData, NearbyError>
     private(set) var isLoading = false
     private var didPresentErrorAlert = false

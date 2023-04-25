@@ -108,7 +108,7 @@ class SearchResultsTableViewController: UITableViewController {
             self.navigationItem.backBarButtonItem = UIBarButtonItem.defaultBackBarButtonItem
         }
     }
-    
+    //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

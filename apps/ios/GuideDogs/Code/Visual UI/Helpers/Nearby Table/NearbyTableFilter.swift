@@ -48,7 +48,6 @@ struct NearbyTableFilter: Equatable {
     
     init(type: PrimaryType?) {
         self.type = type
-        print(type)
         if let type = type {
             switch type {
             case .transit:

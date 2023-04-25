@@ -92,7 +92,6 @@ class ExplorationGenerator: ManualGenerator, AutomaticGenerator {
     
     private var noLocationMessage: String {
         //This error will run if Apple's geocoding fails (ie, if the phone does not have it's own location).
-        print("hello")
         return GDLocalizedString("general.error.location_services_find_location_error")
     }
     
