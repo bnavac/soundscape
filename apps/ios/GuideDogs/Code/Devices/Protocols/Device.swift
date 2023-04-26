@@ -9,13 +9,13 @@
 import Foundation
 
 enum DeviceError: Error {
-    /// Indicates that the device's firmware needs to be updated before it can be connected
+    /// Indicates that the device's firmware needs to be updated before it can be connected.
     case unsupportedFirmwareVersion
-    /// Indicates that a connection error had occurred
+    /// Indicates that a connection error had occurred.
     case failedConnection
-    /// Indicates that a device becomes unavailable
+    /// Indicates that a device becomes unavailable.
     case unavailable
-    /// Indicates that a user canceled the connection attempt
+    /// Indicates that a user canceled the connection attempt.
     case userCancelled
 }
 
