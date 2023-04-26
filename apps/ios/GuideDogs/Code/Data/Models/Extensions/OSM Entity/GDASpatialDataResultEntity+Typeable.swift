@@ -14,7 +14,7 @@ extension GDASpatialDataResultEntity: Typeable {
         switch type {
         //There are three examples of using this method. If you want a general filter grab, such as every landmark, you can just call the method directly. But if you wanted a specific filter, such as bus stops or steps, you can call isOfType(secondaryType). Finally, if you want something that isn't as specific or general, ie the most popular case, use isAmenity. Note that since amenities are optional there is a chance that some POIs will be excluded if they do not have the appropriate amenity.
             case .transit: return isOfType(.transitStop)
-            case .food: return isFood()
+            case .food: return isAmenity(amenities: ["cafe", "restaurant", "fast_food"])
             case .landmarks: return isLandmark()
         }
     }
@@ -50,12 +50,13 @@ extension GDASpatialDataResultEntity: Typeable {
         }
         return category == .landmarks
     }
-    
-    private func isFood() -> Bool{
-        return ((amenity == ("cafe")) || (amenity == ("restaurant")) || (amenity == ("fast_food")))
+    //Returns true if the POI's amenities match one of the given amenities
+    private func isAmenity(amenities: [String]) -> Bool{
+        for amenity in amenities {
+            if(amenity == self.amenity){
+                return true
+            }
+        }
+        return false
     }
-    /*
-    private func isAmenity(_ amenity: [amenity]) -> Bool{
-        
-    }*/
 }
