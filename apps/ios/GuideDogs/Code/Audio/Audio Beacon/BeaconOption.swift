@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents the available haptic beacons that can be used to provide haptic feedback.
 enum BeaconOption: String, CaseIterable, Identifiable {
     case original
     case current
@@ -22,11 +23,11 @@ enum BeaconOption: String, CaseIterable, Identifiable {
     case mallet
     case malletSlow
     case malletVerySlow
-    // Update `style` (see "Beacon+Style") when adding a new
-    // haptic beacon
+    /// Update `style` (see "Beacon+Style") when adding a new haptic beacon.
     case wand
     case pulse
     
+    /// The identifier of the haptic beacon.
     var id: String {
         switch self {
         case .original: return ClassicBeacon.description
@@ -49,6 +50,8 @@ enum BeaconOption: String, CaseIterable, Identifiable {
     
     // MARK: Initialization
     
+    /// Initializes a new haptic beacon with the given identifier.
+    /// - Parameter id: The identifier of the haptic beacon.
     init?(id: String) {
         guard let beacon = BeaconOption.allCases.first(where: { $0.id == id }) else {
             return nil
