@@ -9,13 +9,20 @@
 import AVFoundation
 import Combine
 
+/// TTSConfigHelper is a Swift struct that provides methods for configuring text-to-speech (TTS) voices using
+/// Apple's AVFoundation framework. It includes a set of disallowed voices and functions to load available
+/// voices, filter them based on language and quality, and select a default voice for a given language.
 struct TTSConfigHelper {
+    /// These voices are disallowed because they sound robotic not very seamless.
     static let disallowedVoices: Set<String> = [
         "com.apple.speech.synthesis.voice.Fred",
         "com.apple.speech.synthesis.voice.Victoria",
         "com.apple.speech.voice.Alex"
     ]
     
+    /// Returns the default TTS voice for a given locale, or the first valid voice in the appropriate language if the default voice is disallowed.
+    /// - Parameter locale: The locale for which to get the default TTS voice.
+    /// - Returns: An AVSpeechSynthesisVoice object that matches the language code of the locale, or nil if no such voice is available.
     static func defaultVoice(forLocale locale: Locale) -> AVSpeechSynthesisVoice? {
         guard let voice = AVSpeechSynthesisVoice(language: locale.languageCode) else { return nil }
         
@@ -36,6 +43,11 @@ struct TTSConfigHelper {
         return voice
     }
         
+    /// Loads available TTS voices, filters them based on disallowed voices and condensed them by keeping only the enhanced version if both an enhanced and default version exist.
+    /// - Parameters:
+    ///   - forCurrentLanguage: A Boolean value that indicates whether to return voices for the current language (`true`) or voices for other languages (`false`).
+    ///   - currentLocale: The locale of the current user.
+    /// - Returns: An array of AVSpeechSynthesisVoice objects that match the specified criteria, sorted first by locale and then by name.
     static func loadVoices(forCurrentLanguage: Bool, currentLocale: Locale) -> [AVSpeechSynthesisVoice] {
         let availableVoices = AVSpeechSynthesisVoice.speechVoices().filter({ !self.disallowedVoices.contains($0.identifier) })
         let enhancedVoiceIdStubs: [String] = availableVoices.compactMap { $0.quality == .enhanced ? $0.identifier.replacingOccurrences(of: "premium", with: "") : nil }
