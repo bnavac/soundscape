@@ -10,8 +10,6 @@ import Foundation
 
 /// A class that represents a set of tokens in a string.
 ///
-/// A token is a sequence of characters that is treated as a single entity in a parsing operation. In text processing, tokens are often created by splitting a string into substrings based on a separator character. For example, in the sentence "Hello, world!", the tokens are "Hello" and "world".
-///
 /// The `Token` class provides a way to parse a string into a set of tokens and to perform set operations on these tokens, such as computing their intersection.
 ///
 /// Example usage:

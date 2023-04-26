@@ -10,10 +10,6 @@ import Foundation
 
 /// A generic queue data structure that operates on a First-In, First-Out (FIFO) basis.
 ///
-/// It is implemented using a `LinkedList<T>`, which allows for efficient additions and removal
-/// from both ends. It is thread-safe, so it can be used from multiple threads simultaneously without causing
-/// conflicts or synchronization issues.
-///
 /// To create an empty `Queue<T>`, simply call the default initializer:
 ///
 /// ```
