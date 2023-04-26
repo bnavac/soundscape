@@ -24,7 +24,7 @@ class ServiceModel {
             }
         }
     }
-    
+    //handles the tiles talking to the server
     /// Maximum amount of time (in seconds) to let a request live before timing it out
     static let requestTimeout = 20.0
     
@@ -32,8 +32,11 @@ class ServiceModel {
     static let errorDomain = "GDAHTTPErrorDomain"
     /// String for identifying errors that originate from Realm
     static let errorRealm = "GDAHTTPErrorRealm"
-    
+    //where to add api key for data
     private static let productionServicesHostName = "https://soundscape-production.yourservicesdomain.com"
+    //^^ update this link to match the link key in discord
+    //DO NOT PUSH TO MAIN W KEY
+    
     private static let productionAssestsHostName = "https://yourstaticblobstore"
     // Do not change `productionVoicesHostName`!
     private static let productionVoicesHostName = "https://yourstaticblobstore"
@@ -78,7 +81,7 @@ class ServiceModel {
             
             return nil
         }
-        
+        //because we are using different servers we may need to account for this
         // Is the response of the proper type? (it always should be...)
         guard let httpResponse = response as? HTTPURLResponse else {
             GDLogNetworkError("Response error: response object is not an HTTPURLResponse")
@@ -121,7 +124,7 @@ class ServiceModel {
         
         return status
     }
-    
+    //check that we are correctly getting json instead of alternative file type like prodived by tegola 
     static func validateJsonResponse(request: URLRequest, response: URLResponse?, data: Data?, error: Error?) -> [String: Any]? {
         guard error == nil else {
             return nil

@@ -28,7 +28,7 @@ class OSMServiceModel: OSMServiceModelProtocol {
     private static let path = "/tiles"
     //tile data to be rerouted when api key is given
     func getTileDataWithQueue(tile: VectorTile, categories: SuperCategories, queue: DispatchQueue, callback: @escaping OSMServiceModelProtocol.TileDataLookupCallback) {
-        let url = URL(string: "\(ServiceModel.servicesHostName)\(OSMServiceModel.path)/\(tile.zoom)/\(tile.x)/\(tile.y).json")!
+        let url = URL(string: "(ServiceModel.servicesHostName)/(tile.zoom)/(tile.x)/(tile.y)")!
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ServiceModel.requestTimeout)
         
         // Set the etag header
