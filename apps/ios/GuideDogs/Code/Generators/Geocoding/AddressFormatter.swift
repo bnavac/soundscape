@@ -15,9 +15,11 @@ import CoreLocation
 /// It is recommended that you create an instance of this class when formatting many postal addresses,
 /// and use the instance methods; otherwise use the class methods.
 class AddressFormatter {
-    
+
+    // Creates a `CNPostalAddressFormatter` instance.
     private let postalAddressFormatter = CNPostalAddressFormatter()
-    
+
+    // Formats a `CLPlacemark` object as a string with selected address components.
     func format(from placemark: CLPlacemark,
                 street: Bool = true,
                 city: Bool = true,
@@ -28,13 +30,14 @@ class AddressFormatter {
                 subAdministrativeArea: Bool = true,
                 subLocality: Bool = true) -> String? {
         var postalAddress: CNPostalAddress
-        
+
         guard let postalAddressObject = placemark.postalAddress else {
             return nil
-            
+
         }
         postalAddress = postalAddressObject
-        
+
+        // Includes only selected address components.
         if !street || !city || !state || !postalCode || !country || !isoCountryCode || !subAdministrativeArea || !subLocality {
             postalAddress = postalAddress.postalAddressWithIncludedItems(street: street,
                                                                          city: city,
@@ -48,10 +51,11 @@ class AddressFormatter {
 
         return postalAddressFormatter.string(from: postalAddress)
     }
-    
+
 }
 
 extension CNPostalAddress {
+    // Creates a `CNMutablePostalAddress` instance with included address components.
     func postalAddressWithIncludedItems(street: Bool = true,
                                         city: Bool = true,
                                         state: Bool = true,
@@ -61,7 +65,7 @@ extension CNPostalAddress {
                                         subAdministrativeArea: Bool = true,
                                         subLocality: Bool = true) -> CNMutablePostalAddress {
         let address = CNMutablePostalAddress()
-        
+
         if street { address.street = self.street }
         if city { address.city = self.city }
         if state { address.state = self.state }
@@ -70,7 +74,7 @@ extension CNPostalAddress {
         if isoCountryCode { address.isoCountryCode = self.isoCountryCode }
         if subAdministrativeArea { address.subAdministrativeArea = self.subAdministrativeArea }
         if subLocality { address.subLocality = self.subLocality }
-        
+
         return address
     }
 }
@@ -78,7 +82,7 @@ extension CNPostalAddress {
 extension CNPostalAddressFormatter {
     class func postalAddressFromPlacemark(_ placemark: CLPlacemark) -> CNMutablePostalAddress {
         let address = CNMutablePostalAddress()
-        
+
         if let street = placemark.street {
             address.street = street
         }
@@ -86,47 +90,47 @@ extension CNPostalAddressFormatter {
         if let city = placemark.city {
             address.city = city
         }
-        
+
         if let state = placemark.state {
             address.state = state
         }
-        
+
         if let postalCode = placemark.postalCode {
             address.postalCode = postalCode
         }
-        
+
         if let country = placemark.country {
             address.country = country
         }
-        
+
         if let isoCountryCode = placemark.isoCountryCode {
             address.isoCountryCode = isoCountryCode
         }
-        
+
         if let subAdministrativeArea = placemark.subAdministrativeArea {
             address.subAdministrativeArea = subAdministrativeArea
         }
-        
+
         if let subLocality = placemark.subLocality {
             address.subLocality = subLocality
         }
-        
+
         return address
     }
 }
 
 extension CLPlacemark {
-    
+
     var street: String? {
         return self.thoroughfare ?? self.postalAddress?.street
     }
-    
+
     var city: String? {
         return self.locality ?? self.postalAddress?.city
     }
-    
+
     var state: String? {
         return self.administrativeArea ?? self.postalAddress?.state
     }
-    
+
 }
