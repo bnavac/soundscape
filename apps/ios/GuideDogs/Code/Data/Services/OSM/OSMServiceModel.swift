@@ -26,7 +26,7 @@ enum ServiceError: Error {
 class OSMServiceModel: OSMServiceModelProtocol {
     /// Path to the tile server
     private static let path = "/tiles"
-    
+    //tile data to be rerouted when api key is given
     func getTileDataWithQueue(tile: VectorTile, categories: SuperCategories, queue: DispatchQueue, callback: @escaping OSMServiceModelProtocol.TileDataLookupCallback) {
         let url = URL(string: "\(ServiceModel.servicesHostName)\(OSMServiceModel.path)/\(tile.zoom)/\(tile.x)/\(tile.y).json")!
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ServiceModel.requestTimeout)

@@ -47,7 +47,14 @@ class ExperimentManager {
     }()
     
     private let queue = DispatchQueue(label: "com.company.appname.flightmanager")
-    
+    /*
+     Create a new variable similar to:
+     private static let servicesName = ProcessInfo.processInfo.environment["OSM_DATABASE"]
+     
+     ^^ for api key when enviorment is created
+     finally, add *.xcscheme to your .gitignore file
+     
+     */
     private let service = ExperimentServiceModel()
     
     private(set) var currentFlight: Flight? {
