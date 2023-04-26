@@ -29,5 +29,4 @@ extension BeaconOption {
         case .pulse: return GDLocalizedString("beacon.styles.haptic.pulse")
         }
     }
-    
 }
