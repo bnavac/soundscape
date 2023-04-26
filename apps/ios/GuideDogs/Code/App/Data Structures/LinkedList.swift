@@ -26,11 +26,11 @@ class LinkedListNode<T> {
     }
 }
 
-/// A doubly-linked list of elements. A doubly-linked list is a data structure in which each element
-/// contains a reference to the next and previous elements in the list, allowing for efficient
-/// traversal in both directions. This implementation uses a `LinkedListNode` class to represent
-/// the elements of the list, and provides methods for appending, removing, and retrieving elements
-/// from the list.
+/// A doubly-linked list of elements.
+///
+/// Each element contains a reference to the next and previous elements in the list, allowing for efficient
+/// traversal in both directions. This implementation uses `LinkedListNode` to represent the elements of
+/// the list, and provides methods for appending, removing, and retrieving elements from the list.
 ///
 /// Example usage:
 /// ```
